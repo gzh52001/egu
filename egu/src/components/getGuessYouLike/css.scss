@@ -1,0 +1,25 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+
+.gul-li-box{
+    height: 100%;
+}
+.gul-li {
+//    background: #000;
+    font-size: vw(14);
+
+    .gul-li-img {
+        width: vw(176.25);
+        height: vw(176.25);
+        display:  inline-block
+    }
+    i{
+        font-size: vw(18);
+    }
+    .ico{
+        height:vw(25)
+    ;width: vw(25);
+    }
+}

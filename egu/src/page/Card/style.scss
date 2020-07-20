@@ -1,0 +1,93 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.card{
+    width: vw(375);
+    height:vw(667);
+    background-color: rgb(240,242,245);
+    
+    //头部
+    header{
+        width: 100%;
+        height:vw(38.5);
+        background-color: #fff;
+        border-bottom: 2px solid rgb(211, 210, 210);
+        .navLift{
+          width: 12%;
+          height: 100%;
+          float: left;
+        }
+        .navTitle{
+          width: 76%;
+          height: 100%;
+          float: left;
+          text-align: center;
+          line-height:vw(38.5);
+          font-size: vw(16);
+        }
+        .navRight{
+          width: 12%;
+          height: 100%;
+          float: right; 
+        }    
+      }
+
+      //内容区
+    content{
+
+        //输入区
+        .login_box,
+        .tips
+        {
+            width: vw(345);
+            height:vw(184);
+            background-color: rgb(240,242,245);
+            margin:0 auto;
+            margin-top: vw(28);
+            .cardNumber,
+            .cardPass,
+            .button
+            {
+                height: vw(42);
+                width: 100%;
+                border:none;
+            }
+            .button{
+                background: red;
+            }
+            .ant-row{ //buttom按钮
+                margin-bottom:28px;
+            }
+            input::-webkit-input-placeholder{ //placeholder文本颜色
+                color:rgb(117,117,117);
+            }
+            .ant-input{ //输入框
+                padding:0 0 0 14px;
+            }
+        }
+
+        //提示区
+        .tips{
+            li{
+                width: 100%;
+                height:vw(32);
+                margin-top:vw(3);
+                span
+                {
+                    float: left;
+                    width: vw(34.5);
+                    height:100%;
+                    text-indent: vw(19);    //文本位置
+                    line-height: vw(15);    //文本行高
+                }
+                p{
+                    width: 100%;
+                    font-size: vw(12.5);
+                    line-height: vw(15);
+                    color:rgb(119,119,119);
+                }
+            }
+        }
+    }
+}

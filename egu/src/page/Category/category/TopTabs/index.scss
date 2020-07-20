@@ -1,0 +1,23 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.classify-items {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: #fff;
+    li {
+        width: vw(73);
+        padding: 0 vw(4.3);
+        height: vw(40);
+        flex-shrink: 0;
+        text-align: center;
+        line-height: vw(40);
+    }
+    
+    .active {
+        color: orange;
+    }
+}

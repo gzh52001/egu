@@ -1,0 +1,35 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.category {
+    width: 100%;
+    padding: vw(80) 0 50px;
+    
+    .category-top {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        background-color: #fff;
+    }
+
+    .category-content {
+        display: flex;
+        height: 500px;  
+        
+        .left-tabs {
+            width: vw(80);
+        }
+    
+        .classify-list-wrap {
+            flex: 1;
+            min-width: 0;
+            background-color: #fff;
+            overflow-y: auto;
+        }
+    
+    }
+}
+

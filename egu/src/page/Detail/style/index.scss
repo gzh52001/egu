@@ -1,0 +1,108 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.app-detail {
+    width: 100%;
+    // 轮播图
+    .detial-swiper {
+        position: relative;
+        width: 100%;
+        .indicator {
+            position: absolute;
+            bottom: vw(10);
+            right: vw(16);
+            z-index: 9;
+            background: #E9E9EB;
+            height: vw(22);
+            width: vw(40);
+            text-align: center;
+            border-radius: vw(11);
+            color: gray;
+        }
+    }
+
+    // 主要描述
+    .main-desc {
+        padding: vw(10);
+        border-bottom: 1px solid #cfcaca;
+        border-top: 1px solid #cfcaca;
+        background-color: #fff;
+        .price-collect {
+            display: flex;
+            justify-content: space-between;
+             // 价格
+            .price {
+                font-size: vw(16);
+                display: flex;
+                align-items: center;
+                p::before {
+                    content: "￥";
+                    font-size: vw(16);
+                }
+                .now-price {
+                    color: #f80;
+                    margin-right: vw(10);
+                    font-weight: 600;
+                    span {
+                        font-size: vw(25);
+                    }
+                }
+                .origin-price {
+                    color: #999;
+                    text-decoration: line-through;
+                }
+            }
+
+            // 收藏
+            .collect {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                span {
+                    font-size: vw(10);
+                }
+                i {
+                    text-align: bottom;
+                }
+            }
+
+
+
+        }
+
+        .about-express {
+            font-size: vw(12);
+            margin: vw(12) 0;
+            .order {
+                color: #f80;
+            }
+            .tag {
+                background-color: #f80;
+                height: vw(18);
+                line-height: vw(18);
+                padding: 0 vw(4);
+                color: #fff;
+                border-radius: vw(9);
+                margin: 0 vw(10);
+            }
+            .express-addr {
+                color: #AF52EF;
+            }
+        }
+
+        .good-name {
+            font-weight: 600;
+            font-size: vw(13);
+        }
+    }
+
+    // 选择
+    .select {
+        // background-color: pink;
+        .extra {
+            font-weight: bold;
+        }
+    }
+}

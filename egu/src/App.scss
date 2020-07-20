@@ -1,0 +1,42 @@
+// html {
+//   width: 100%;
+//   height:auto;
+//   overflow-x: hidden;
+// }
+
+// body {
+//   width: 100%;
+//   height:auto;
+//   overflow-y:scroll;
+// }
+
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.container {
+    .tabbar {
+        height: 46px;
+        width: vw(375);
+        border-top: 1px solid #eee;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        font-size: 13px;
+        z-index: 99;
+        .link {
+            color: #666;
+        }
+
+        .tabbar-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #fff;
+        }
+
+        .current {
+            color: #ff8800;
+        }
+    }
+}

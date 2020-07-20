@@ -1,0 +1,8 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.info-list {
+    margin-bottom: vw(14);
+    background-color: #fff;
+}

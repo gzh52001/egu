@@ -1,0 +1,36 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+.content{
+    padding-top:vw(44)
+}
+.cart {
+    width: vw(375);
+    height: 100%;
+    background: #f5f5f5;
+}
+
+.van-list {
+    margin: 32% auto;
+    .not-exist {
+        text-align: center;
+
+        img {
+        
+            margin: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        button {
+            padding: 0 vw(10);
+            border-radius: 10vw;
+            border: none;
+            background: #fff;
+            height: 5vw;
+            line-height: 5vw;
+            font-size: 12px;
+
+        }
+    }
+}

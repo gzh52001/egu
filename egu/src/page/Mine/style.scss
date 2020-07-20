@@ -1,0 +1,101 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.mine {
+    background: #f5f5f5;
+    width: vw(375);
+    height: 100%;
+}
+
+.top {
+    position: absolute;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.flx {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.user-wrap {
+    width: 100%;
+    min-height: vw(133.5);
+    position: relative;
+    background: url("http://m.egu365.com/img/user_bg.png")no-repeat;
+    background-size: 100% vw(133);
+}
+
+.user-wrap>img {
+    width: 100%;
+}
+
+.user-ht {
+    width: 100%;
+    height: vw(61);
+    position: absolute;
+    top: vw(42);
+    left: 0;
+    padding-left: vw(17.8);
+
+}
+
+.user-ht>img {
+    height: vw(61);
+    width: vw(61);
+    border-radius: 50%;
+    background: #fff;
+}
+
+.user-t {
+    color: #fff;
+    font-size: 1434px;
+    padding: 0 vw(17);
+}
+
+.greet {
+    padding-top: vw(17.6);
+    font-size: 14px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
+
+}
+
+
+.card-view-box {
+    margin: 3.206%;
+    // width: 93.588%;
+    height: vw(72.4);
+    background-color: #fcfcfc;
+}
+
+.card-view>img {
+    display: inline-block;
+    height: vw(38.38);
+    width: vw(38.38);
+}
+
+.card-view {
+    width: vw(70.5);
+    height: vw(73);
+    font-size: 12px;
+    padding: vw(7.5) 0;
+}
+
+.card-view-text {
+    height: vw(20.3);
+    line-height: vw(20.3);
+}
+
+.am-grid .am-flexbox .am-flexbox-item .am-grid-item-content {
+    padding: 0;
+}

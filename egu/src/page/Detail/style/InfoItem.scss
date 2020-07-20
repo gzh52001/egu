@@ -1,0 +1,16 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.info-item {
+    display: flex;
+    font-size: vw(12);
+    padding: vw(10);
+    box-sizing: border-box;
+    .left {
+        width: vw(40);
+    }
+    .right {
+        flex: 1;
+    }
+}

@@ -1,0 +1,41 @@
+ const navList =[{
+    id:1,
+    title:"依谷热卖"
+},
+{
+    id:2,
+    title:"新鲜水果"
+},
+{
+    id:3,
+    title:"绿色菜篮"
+},
+{
+    id:4,
+    title:"粮油调味"
+},
+{
+    id:5,
+    title:"干货特产"
+},
+{
+    id:6,
+    title:"零食饮料"
+},
+{
+    id:7,
+    title:"美酒茗茶"
+},
+{
+    id:8,
+    title:"礼品礼券"
+},
+{
+    id:9,
+    title:"家具厨卫"
+},
+{
+    id:10,
+    title:"创意家电"
+}]
+export default navList;

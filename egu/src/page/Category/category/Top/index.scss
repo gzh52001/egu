@@ -1,0 +1,19 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+
+.top-search {
+    width: 100%;;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    .left, .right {
+        width:vw(40);
+    }
+    .center {
+        flex: 1;
+        background-color: pink;
+    }
+}
+

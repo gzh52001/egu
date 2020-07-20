@@ -1,0 +1,90 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.login{
+    width: vw(375);
+    height:vw(667);
+    background-color: rgb(240,242,245);
+    
+    //头部
+    header{
+        width: 100%;
+        height:vw(38.5);
+        background-color: #fff;
+        border-bottom: 2px solid rgb(211, 210, 210);
+        .navLift{
+          width: 12%;
+          height: 100%;
+          float: left;
+        }
+        .navTitle{
+          width: 76%;
+          height: 100%;
+          float: left;
+          text-align: center;
+          line-height:vw(38.5);
+          font-size: vw(16);
+        }
+        .navRight{
+          width: 12%;
+          float: right; 
+        }    
+      }
+
+        //输入区
+    .login_box{
+        width: vw(330);
+        height:vw(184);
+        background-color: rgb(240,242,245);
+        margin:0 auto;
+        margin-top: vw(33);
+        position: relative;
+        .cardNumber,
+        .cardPass,
+        .button
+        {
+            height: vw(44);
+            width: 100%;
+            border:none;
+            font-size:vw(13)
+        }
+        .button{
+            background:rgb(255,172,10);
+            font-size:vw(14);
+            margin-top:vw(30)
+        }
+        .ant-row{ //Form.Item底部距离
+            margin-bottom:33px;
+        }
+        input::-webkit-input-placeholder{ //placeholder文本颜色
+            color:rgb(117,117,117);
+        }
+        .ant-input{ //输入框
+            padding:0 0 0 14px;
+        }
+        .verification{  //验证提示信息
+            top: vw(128);
+            position: absolute;
+            margin-left:vw(6)
+        }
+    }
+    .logname{
+        width: vw(330);
+        height:vw(19);
+        margin:0 auto;
+        margin-top: vw(80);
+        p{
+            height: 100%;
+            line-height: vw(16);
+        }
+        .b1{
+            float:left;
+        }
+        .b2{
+            float: right;
+            text-align: right;
+            color:red;
+        }
+    }
+}

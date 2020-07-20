@@ -1,0 +1,111 @@
+.container {
+  width: 100vw;
+}
+
+.container .list {
+  padding-bottom: 60px;
+  min-height: 70vh;
+  position: relative;
+  background: #f9f5f6;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  top: 86px;
+}
+
+.container .list .list-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 73px;
+}
+
+.container .list .list-content .list-item {
+  width: 46.93333vw;
+  background: #fff;
+  margin-top: 10px;
+}
+
+.container .list .list-content .list-item img {
+  width: 100%;
+}
+
+.container .list .list-content .list-item .item-goods-name,
+.container .list .list-content .list-item .item-goods-desc {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+  padding: 0 5px;
+}
+
+.container .list .list-content .list-item .item-goods-name {
+  font-size: 13px;
+  color: #4f4f4f;
+}
+
+.container .list .list-content .list-item .item-goods-desc {
+  color: #939393;
+  font-size: 10px;
+  height: 20px;
+}
+
+.container .list .list-content .list-item i {
+  font-style: normal;
+}
+
+.container .list .list-content .list-item .self-support {
+  color: #ff8800;
+  font-size: 10px;
+  padding: 0 5px;
+}
+
+.container .list .list-content .list-item .self-support .morrow {
+  border-radius: 10px;
+  background: #ff8800;
+  color: white;
+  padding: 1px 4px;
+  margin-left: 5px;
+}
+
+.container .list .list-content .list-item .consignment {
+  font-size: 10px;
+  color: #000cff;
+  margin: 0 5px;
+}
+
+.container .list .list-content .list-item .express {
+  margin: 0 5px;
+  color: #af52ef;
+  font-size: 10px;
+}
+
+.container .list .list-content .list-item .item-goods-price {
+  color: #ff8800;
+  font-size: 16px;
+  height: 35px;
+  line-height: 30px;
+  padding-left: 8px;
+  font-weight: bold;
+}
+
+.container .list .list-content .list-item .item-goods-icon {
+  color: #ff8800;
+  float: right;
+  padding-right: 15px;
+}
+
+.container .go-top {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  z-index: 99;
+}

@@ -1,0 +1,28 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.classify {
+    .classify-item {
+        position: relative;
+        text-align: center;
+        height: vw(44);
+        line-height: vw(44);
+        color: #999;
+        i {
+            position: absolute;
+            top: vw(12);
+            left: 0;
+            background: rgb(129, 161, 129);
+            height: vw(20);
+            width: vw(2);
+        }
+    }
+
+    .active {
+        color: black;
+    }
+}
+
+
+
