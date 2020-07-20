@@ -22,6 +22,12 @@ function GoTop(){
         window.scrollTo(0,0)
     },[])
 
+    useEffect(()=>{
+        return function(){
+            window.onscroll = null;
+        }
+    },[])
+
     return (
         isShow ?<div className="go-top" onClick={goToTop}>
             <ToTopOutlined style={{fontSize:20,color:"#aaa"}} />

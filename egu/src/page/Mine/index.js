@@ -7,7 +7,9 @@ import Top from "@/components/Top"
 import './style.scss';
 
 class Mine extends Component{
-
+    componentDidMount(){
+        console.log(window.scrollY);
+    }
     render() {
         return (
             <div className="mine">
@@ -76,7 +78,7 @@ class Mine extends Component{
             <div className='guess-you-like'>
                 <img src='http://m.egu365.com/img/guess_you_like.jpg'/>
                 <Gyl/>
-                <GoTop/>
+                {/* <GoTop/> */}
             </div>
 
         </div>)
