@@ -5,6 +5,7 @@ import  Gyl from "../../components/getGuessYouLike";
 import GoTop from "../../components/GoTop"
 import Top from "@/components/Top"
 import './style.scss';
+import Pop from './../Bubble/bubble'
 
 class Mine extends Component{
     componentDidMount(){
@@ -17,7 +18,7 @@ class Mine extends Component{
             <div className="top">
                 <Top 
                     left = {<img src="http://m.egu365.com/img/not_user.jpg" style={{borderRadius:"50%",width:"65%"}}></img>}
-                    right = {<i className="iconfont icon-gengduo"></i>}
+                    right = {<Pop />}
                     center = {{
                         contentStyle:{fontWeight:600,}
                     }}

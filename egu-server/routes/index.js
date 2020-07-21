@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-var bodyParser = require('body-parser');
 
+var bodyParser = require('body-parser');
 router.use(bodyParser.json()); // 转json数据
 router.use(bodyParser.urlencoded({extended:false})); // 转键值对数据 key=value&key=value
 

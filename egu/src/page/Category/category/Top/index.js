@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { SearchBar, Icon } from 'antd-mobile';
 import "./index.scss";
+import Pop from './../../../Bubble/bubble'
 
 export default class Top extends Component {
     constructor(){
@@ -25,7 +26,8 @@ export default class Top extends Component {
                     />
                 </div>
                 <div className="right">
-                    <Icon type="ellipsis" />
+                   {/*  <Icon type="ellipsis" /> */}
+                   <Pop />
                 </div>
             </div>
         )

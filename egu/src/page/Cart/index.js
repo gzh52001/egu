@@ -6,6 +6,7 @@ import {DeleteOutlined} from '@ant-design/icons';
   
 import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
 import "./css.scss"
+import Pop from './../Bubble/bubble'
 class Cart extends Component{
     state={
         cartData:[{
@@ -91,7 +92,7 @@ class Cart extends Component{
              {/* top */}
              <Top 
                     left = {<i className="iconfont icon-zuojiantou" onClick={this.goback}></i>}
-                    right = {<i className="iconfont icon-gengduo"></i>}
+                    right = {<Pop />}
                     center = {{
                         contentStyle:{fontWeight:600,}
                     }}
