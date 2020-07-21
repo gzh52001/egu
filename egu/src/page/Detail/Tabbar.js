@@ -8,8 +8,12 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
  class Tabbar extends Component {
     //  事件
     // 加入购物车
-    addToCart() {
+    addToCart=()=>{
         console.log(77777777777777);
+    }
+    buyNew=()=>{
+        this.addToCart()
+        this.props.history.push("/cart")
     }
     render() {
         return (
@@ -34,7 +38,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
                 <li className="botton-aciton cart" onClick={this.addToCart}>
                     加入购物车
                 </li>
-                <li className="botton-aciton buy">
+                <li className="botton-aciton buy" onClick={this.buyNew}>
                     立即购买
                 </li>
             </ul>
