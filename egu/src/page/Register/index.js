@@ -4,6 +4,10 @@ import './style.scss'
 
 import { LeftOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
+<<<<<<< HEAD
+=======
+import Pop from './../Bubble/bubble'
+>>>>>>> jiangzb
 
 class Register extends Component {
     jumpRout(rout) {
@@ -17,7 +21,13 @@ class Register extends Component {
                 <header>
                     <div className='navLift' onClick={this.jumpRout.bind(this,'/login')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>依谷注册</div>
+<<<<<<< HEAD
                     <div className='navRight'><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
+=======
+                    <div className='navRight'>
+                        <Pop />
+                    </div>
+>>>>>>> jiangzb
                 </header>
 
                 {/* 输入区 */}

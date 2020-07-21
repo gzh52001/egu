@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import './style.scss'
+<<<<<<< HEAD
 import { LeftOutlined, EllipsisOutlined, HomeOutlined, AppstoreOutlined, UserOutlined, ShoppingCartOutlined, ShopOutlined } from '@ant-design/icons';
+=======
+import { LeftOutlined } from '@ant-design/icons';
+>>>>>>> jiangzb
 import { Form, Input, Button } from 'antd';
+import Pop from '../Bubble/bubble' //引入气泡组件
 
+<<<<<<< HEAD
 
 import { Popover } from 'antd-mobile';
 const Item = Popover.Item;
@@ -44,10 +50,15 @@ class Login extends Component {
     };
 
 
+=======
+class Login extends Component {
+
+>>>>>>> jiangzb
     jumpRout(rout) {
         this.props.history.push(rout);
     }
 
+<<<<<<< HEAD
 
     onSelect = (opt) => {  //选中触发方法
         this.setState({
@@ -62,12 +73,17 @@ class Login extends Component {
 
 
 
+=======
+>>>>>>> jiangzb
     render() {
         const verification = {  //输入框验证
             required: '你还没有输入任何内容!',
         };
 
+<<<<<<< HEAD
         let { bubbleList } = this.state;
+=======
+>>>>>>> jiangzb
         return (
             <div className='login'>
                 {/* 头部 */}
@@ -75,6 +91,7 @@ class Login extends Component {
                     <div className='navLift' onClick={this.jumpRout.bind(this, '/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>用户登录</div>
                     <div className='navRight'>
+<<<<<<< HEAD
                         <Popover mask //遮罩层开启
                             visible={this.state.visible}  //遮罩状态
                             overlay={[
@@ -117,6 +134,10 @@ class Login extends Component {
 
 
 
+=======
+                        {/* 使用气泡组件 */}
+                        <Pop />
+>>>>>>> jiangzb
                     </div>
                 </header>
 

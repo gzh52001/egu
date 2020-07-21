@@ -4,6 +4,7 @@ import './style.scss';
 
 import { LeftOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
+import Pop from './../Bubble/bubble'
 
 
 class Card extends Component {
@@ -21,19 +22,21 @@ class Card extends Component {
             }
         ]
     }
-    jumpRout(rout){
+    jumpRout(rout) {
         this.props.history.push(rout);
     }
     render() {
-        const {list}=this.state;
+        const { list } = this.state;
         return (
             <div className='card'>
 
                 {/* 头部 */}
                 <header>
-                    <div className='navLift' onClick={this.jumpRout.bind(this,'/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
+                    <div className='navLift' onClick={this.jumpRout.bind(this, '/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>卡券兑换</div>
-                    <div className='navRight' onClick={this.jumpRout.bind(this,'/login')}><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
+                    <div className='navRight'>
+                        <Pop />
+                    </div>
                 </header>
 
                 {/* 内容区 */}
