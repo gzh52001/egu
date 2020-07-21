@@ -39,6 +39,10 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         });
         
     }
+    buyNew=()=>{
+        this.addToCart()
+        this.props.history.push("/cart")
+    }
     render() {
         return (
             <ul className="detail-tabbar">
@@ -62,7 +66,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
                 <li className="botton-aciton cart" onClick={this.addToCart}>
                     加入购物车
                 </li>
-                <li className="botton-aciton buy">
+                <li className="botton-aciton buy" onClick={this.buyNew}>
                     立即购买
                 </li>
             </ul>
