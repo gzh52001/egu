@@ -1,6 +1,6 @@
 const express = require('express')
 const query = require('../../db/mysql');
-const {create} =  require('./token')
+const {create,verify} =  require('./token')
 
 const router = express.Router();
 
@@ -36,7 +36,6 @@ router.get('/checkname',async (req,res)=>{
         res.send(info);
     }
 })
-
 
 // 注册
 router.post('/register',async (req,res)=>{
@@ -83,16 +82,19 @@ router.get('/login',async (req,res) =>{
             info ={
                 code:2000,
                 status:true,
+                data:{
+                    token
+                },
                 msg:'登录成功'
             }
         }else{
             info ={
-                code:2000,
-                status:true,
+                code:3000,
+                status:false,
                 msg:'登录失败'
             }
         }
-        console.log('user',token)
+        // console.log('user',token)
         res.send(info)
     } catch (error) {
         let info = {
@@ -103,5 +105,29 @@ router.get('/login',async (req,res) =>{
         res.send(info);
     }
 })
+
+// 验证token
+router.get('/verify',(req,res)=>{
+    let {token} = req.query;
+    let result = verify(token);
+    // console.log(result)
+    let info = {};
+        if(result){
+            info = {
+                code:2000,
+                status:true,
+                msg:'验证成功'
+            }
+        }else{
+            info = {
+                code:3000,
+                status:false,
+                msg:'验证失败'
+            }
+        }
+        res.send(info);
+})
+
+
 
 module.exports = router;
