@@ -1,15 +1,37 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 
+import detailApi from "@/api/detail";
 import "./style/Tabbar.scss";
+
+import axios from "axios";
 
 import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/icons';
 
  class Tabbar extends Component {
+     constructor(){
+         super();
+         this.addToCart = this.addToCart.bind(this);
+     }
     //  事件
     // 加入购物车
     addToCart() {
-        console.log(77777777777777);
+        let data = {
+            userId:200,
+            goodId:123,
+            goodName:123,
+            goodDesc:123,
+            price:123,
+            img:123,
+            num:123,
+            sum:123,
+            isSelect:0,
+        }
+        detailApi.addToCart(data).then(res => {
+            console.log(33333333333, res);
+        });
+        // axios.post("/api/aa").then(res => console.log(res));
+        
     }
     render() {
         return (
