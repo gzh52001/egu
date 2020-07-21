@@ -113,7 +113,9 @@ export default class Detail extends Component {
             <div className="app-detail" ref = {el => this.elAppDetail = el}>
                 {/* top */}
                 <Top 
-                    left = {<i onClick={() => this.props.history.push("/category")} className="iconfont icon-zuojiantou"></i>}
+                    left = {<i 
+                        onClick={() => this.props.history.push("/category")} 
+                        className="iconfont icon-zuojiantou"></i>}
                     right = {<i className="iconfont icon-gengduo"></i>}
                     center = {{
                         contentStyle:{

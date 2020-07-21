@@ -40,6 +40,7 @@ class NavListData extends Component {
         }
 
           if(scrollTop + clientHeight >= scrollHeight-50 && !this.state.isBottom){
+            //   console.log("bottom");
               // 发送请求
               this.setState({page:this.state.page+1,isBottom:true})
                 // console.log(this.state.page,this.state.isBottom)
