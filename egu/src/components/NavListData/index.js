@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Search from '@/components/Search';
+import {withRouter} from 'react-router-dom'
 import {ShoppingCartOutlined,ToTopOutlined} from '@ant-design/icons';
 import homeApi from '@/api/home';
 import './style.scss';
@@ -17,6 +18,10 @@ class NavListData extends Component {
      goToTop=()=>{
         window.scrollTo(0,0)
      }
+
+    goDetail=(id)=>{
+    this.props.history.push(`/detail/${id}`);
+    }
 
     checkScroll= (tid,id)=>{
         window.onscroll=async ()=>{
@@ -50,7 +55,6 @@ class NavListData extends Component {
   }
 
     async componentDidMount() {
-
         let {id} = this.props;
         let res = [];
         let bgImg = [];
@@ -100,7 +104,7 @@ class NavListData extends Component {
       
     }
 
-
+   
     render() {
         let { goodsListData, bgImg,isShowTop } = this.state
         return (
@@ -111,7 +115,7 @@ class NavListData extends Component {
                         {
                             goodsListData.map(item=>(
                                 <div className="list-item" key={item.id}>
-                                        <img src={item.icoImg} alt={item.goodsName} />
+                                        <img src={item.icoImg} alt={item.goodsName} onClick={this.goDetail.bind(null,item.id)} />
                                         <p className="item-goods-name">{item.goodsName}</p>
                                         <p className="item-goods-desc">{item.slogan?item.slogan:''}</p>
                                         {
@@ -141,4 +145,4 @@ class NavListData extends Component {
         )
     }
 }
-export default NavListData;
+export default withRouter(NavListData);

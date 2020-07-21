@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import { WhiteSpace  } from 'antd-mobile';
 import {ShoppingCartOutlined} from '@ant-design/icons';
 import homeApi from '@/api/home.js'
@@ -72,7 +73,8 @@ class HotGoods extends Component {
     }
 
     goDetail = (id) => {
-        console.log(id)
+        // console.log(this.props)
+        this.props.history.push(`/detail/${id}`)
     }
 
     renderData=(title,data)=>{
@@ -142,4 +144,4 @@ class HotGoods extends Component {
     }
 }
 
-export default HotGoods
+export default withRouter(HotGoods)

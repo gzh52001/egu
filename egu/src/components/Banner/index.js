@@ -35,10 +35,9 @@ class Banner extends Component{
                     {banner.map(item => (
                         <a
                         key={item.id}
-                        href={item.link}
-                        // href="javascript;;"
+                        // href={item.link}
                         style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
-                        onClick={()=>{return false}}
+                        // onClick={()=>{return false;}}
                         >
                         <img
                             src={item.img}

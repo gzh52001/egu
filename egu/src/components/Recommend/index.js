@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {ShoppingCartOutlined} from '@ant-design/icons';
+import {withRouter} from 'react-router-dom'
 import homeApi from '@/api/home';
 import './style.scss';
 
@@ -49,7 +50,7 @@ class Recommend extends Component{
 
     // 跳转详情页
     goDetail = (id)=>{
-        console.log(id)
+        this.props.history.push(`/detail/${id}`);
     } 
 
     // 渲染列表
@@ -96,4 +97,4 @@ class Recommend extends Component{
     }
 }
 
-export default  Recommend;
+export default  withRouter(Recommend);
