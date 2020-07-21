@@ -7,7 +7,7 @@
 .home {
   width: vw(375);
   height: auto;
-  padding-bottom: 60px;
+  // padding-bottom: 60px;
 
   .am-tabs-default-bar-underline {
     border: 1px solid #ff8800;
@@ -15,6 +15,7 @@
  
   .am-tabs {
     position: absolute;
+    // background: #fff;
     // z-index: 2;
   }
 

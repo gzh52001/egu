@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Tabs,WhiteSpace  } from 'antd-mobile';
 import { Input, Row, Col  } from 'antd';
 import { StickyContainer  } from 'react-sticky';
+import {cancel} from '@/api/myaxios'
 import Swiper from 'swiper';
 import "swiper/swiper.scss"  
 
@@ -73,6 +74,10 @@ class Home extends Component{
           
           }) 
     }
+    componentWillUnmount(){
+        cancel('get_http://api.egu365.com/news/recommend/seats/136/images','被拦截')
+        cancel('get_http://api.egu365.com/news/recommend/seats/138/images','被拦截')
+    }
   
 
     render() {
@@ -98,6 +103,7 @@ class Home extends Component{
                             <div style={{height:40,display:'flex',justifyContent:'center',alignItems:'center'}}>
                                 <Input  placeholder="依谷扶贫"/>
                             </div>
+
                     </Tabs>
                 </StickyContainer>
                 

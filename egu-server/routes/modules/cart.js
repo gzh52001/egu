@@ -16,22 +16,28 @@ let data = {
     isSelect:0,
 }
 // 添加
-router.post("/add", async ( req, res) => { 
-    let keys = Object.keys(data);
-    let values = Object.values(data);
-    let sql = `INSERT INTO cart(${keys.join()}) VALUES(${values.join()})`
-    let result = await query(sql);
-    if(result.affectedRows) {
-        res.send({
-            code:1,
-            msg: "添加购物车成功",
-        });
-    } else {
-        res.send({
-            code:0,
-            msg: "添加购物车失败",
-        });
-    }
+router.post("/add", ( req, res) => { 
+    console.log(req.body);
+    res.sendStatus(111111111);
+    // // 前端传递来的数据
+    // let keys = Object.keys(req.body);
+    // let values = Object.values(req.body);
+    // // sql语句
+    // let sql = `INSERT INTO cart(${keys.join()}) VALUES(${values.join()})`
+    // let result = await query(sql);
+    // // 判断数据库操作是否成功，通过受影响行判断
+    // if(result.affectedRows) {
+    //     // 返回结果给前端
+    //     res.send({
+    //         code:1,
+    //         msg: "添加购物车成功",
+    //     });
+    // } else {
+    //     res.send({
+    //         code:0,
+    //         msg: "添加购物车失败",
+    //     });
+    // }
 })
 
 
