@@ -3,9 +3,14 @@ import { withRouter } from "react-router-dom";
 
 import "./style/Tabbar.scss";
 
-import {HomeOutlined,UserOutlined,ShoppingCartOutlined,AppstoreOutlined,CreditCardOutlined  } from '@ant-design/icons';
+import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/icons';
 
  class Tabbar extends Component {
+    //  事件
+    // 加入购物车
+    addToCart() {
+        console.log(77777777777777);
+    }
     render() {
         return (
             <ul className="detail-tabbar">
@@ -26,7 +31,7 @@ import {HomeOutlined,UserOutlined,ShoppingCartOutlined,AppstoreOutlined,CreditCa
                     <span>购物车</span>
                     <i>0</i>
                 </li>
-                <li className="botton-aciton cart">
+                <li className="botton-aciton cart" onClick={this.addToCart}>
                     加入购物车
                 </li>
                 <li className="botton-aciton buy">
