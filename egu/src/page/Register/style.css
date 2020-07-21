@@ -1,0 +1,74 @@
+.register {
+  width: 100vw;
+  height: 177.86667vw;
+  background-color: #f0f2f5;
+}
+
+.register header {
+  width: 100%;
+  height: 10.26667vw;
+  background-color: #fff;
+  border-bottom: 2px solid #d3d2d2;
+}
+
+.register header .navLift {
+  width: 12%;
+  height: 100%;
+  float: left;
+}
+
+.register header .navTitle {
+  width: 76%;
+  height: 100%;
+  float: left;
+  text-align: center;
+  line-height: 10.26667vw;
+  font-size: 4.26667vw;
+}
+
+.register header .navRight {
+  width: 12%;
+  float: right;
+}
+
+.register .login_box {
+  width: 92vw;
+  height: 49.06667vw;
+  background-color: #f0f2f5;
+  margin: 0 auto;
+  margin-top: 7.46667vw;
+}
+
+.register .login_box .cardNumber,
+.register .login_box .button {
+  height: 11.2vw;
+  width: 100%;
+  border: none;
+}
+
+.register .login_box .button {
+  background: red;
+  height: 11.94667vw;
+}
+
+.register .login_box .ant-row {
+  margin-bottom: 28px;
+}
+
+.register .login_box input::-webkit-input-placeholder {
+  color: red;
+}
+
+.register .login_box .ant-input {
+  padding: 0 0 0 14px;
+}
+
+.register .login_box h4 {
+  margin-top: -vw(6);
+  color: #848689;
+}
+
+.register .login_box h4 a {
+  color: black;
+  text-decoration: underline;
+}

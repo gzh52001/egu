@@ -3,6 +3,7 @@ import Gyl from "@/components/getGuessYouLike"
 import Top from "@/components/Top"
 import Cartbottom from "./bottom"
 import "./css.scss"
+import Pop from './../Bubble/bubble'
 class Cart extends Component{
     goback=()=>{
         const {history}= this.props;
@@ -14,7 +15,7 @@ class Cart extends Component{
              {/* top */}
              <Top 
                     left = {<i className="iconfont icon-zuojiantou" onClick={this.goback}></i>}
-                    right = {<i className="iconfont icon-gengduo"></i>}
+                    right = {<Pop />}
                     center = {{
                         contentStyle:{fontWeight:600,}
                     }}

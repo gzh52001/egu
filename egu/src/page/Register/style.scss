@@ -1,0 +1,71 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.register{
+    width: vw(375);
+    height:vw(667);
+    background-color: rgb(240,242,245);
+    
+    //头部
+    header{
+        width: 100%;
+        height:vw(38.5);
+        background-color: #fff;
+        border-bottom: 2px solid rgb(211, 210, 210);
+        .navLift{
+          width: 12%;
+          height: 100%;
+          float: left;
+        }
+        .navTitle{
+          width: 76%;
+          height: 100%;
+          float: left;
+          text-align: center;
+          line-height:vw(38.5);
+          font-size: vw(16);
+        }
+        .navRight{
+          width: 12%;
+          float: right; 
+        }    
+      }
+
+       //输入区
+    .login_box{
+        width: vw(345);
+        height:vw(184);
+        background-color: rgb(240,242,245);
+        margin:0 auto;
+        margin-top: vw(28);
+        .cardNumber,
+        .button
+        {
+            height: vw(42);
+            width: 100%;
+            border:none;
+        }
+        .button{
+            background: red;
+            height: vw(44.8);
+        }
+        .ant-row{ //buttom按钮
+            margin-bottom:28px;
+        }
+        input::-webkit-input-placeholder{ //placeholder文本颜色
+            color:red;
+        }
+        .ant-input{ //输入框
+            padding:0 0 0 14px;
+        }
+        h4{
+            margin-top: -vw(6);
+            color:rgb(132,134,137);
+            a{
+                color:black;
+                text-decoration:underline;
+            }
+           }
+       }
+}
