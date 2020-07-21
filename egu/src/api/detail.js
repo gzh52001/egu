@@ -1,4 +1,5 @@
 import require from "@/utils/require";
+import node_request from "@/utils/http";
 
 // 获取详情页轮播图
 function getBannerImgs(id) {
@@ -19,9 +20,19 @@ function getDescImgs() {
     return require.get("/goods/desc?id=790f3865f2c44e50ab64");
 }
 
+// 加入购物车
+function addToCart(data) {
+    return node_request({
+        url: "/cart/add",
+        method: "post",
+        data
+    })
+}
+
 // 导出
 export default {
     getBannerImgs,
     getGoodInfo,
-    getDescImgs
+    getDescImgs,
+    addToCart
 }

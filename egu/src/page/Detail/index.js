@@ -251,7 +251,7 @@ export default class Detail extends Component {
                 </div>
                 
                 {/* tabbar */}
-                <Tabbar></Tabbar>
+                <Tabbar goodInfo={this.state.goodInfo}></Tabbar>
             {/* app-detail-end */}
             </div>
         )
