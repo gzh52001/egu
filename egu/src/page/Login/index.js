@@ -1,21 +1,22 @@
-import React from 'react'
+import React,{Component} from 'react'
 
 import './style.scss'
 
 import { LeftOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
 
-function Login() {
+class Login extends Component{
 
-   /*  jumpRout(rout){
+    jumpRout(rout){
         this.props.history.push(rout);
-    } */
+    }
+    render(){
     return (
         <div className='login'>
 
             {/* 头部 */}
             <header>
-                <div className='navLift'><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
+                <div className='navLift' onClick={this.jumpRout.bind(this,'/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                 <div className='navTitle'>用户登录</div>
                 <div className='navRight'><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
             </header>
@@ -40,10 +41,11 @@ function Login() {
                 </Form>
             </div>
             <div className="logname">
-                <p className="b1">手机快速注册</p>
+                <p className="b1" onClick={this.jumpRout.bind(this,'/register')}>手机快速注册</p>
                 <p className="b2">忘记密码</p>
             </div>
         </div>
     )
+    }
 }
 export default Login;
