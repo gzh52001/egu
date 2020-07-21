@@ -3,23 +3,43 @@
 }
 
 
-.gul-li-box{
+.gul-li-box {
     height: 100%;
 }
+
 .gul-li {
-//    background: #000;
+    //    background: #000;
     font-size: vw(14);
 
     .gul-li-img {
         width: vw(176.25);
         height: vw(176.25);
-        display:  inline-block
+        display: inline-block
     }
-    i{
+
+    i {
         font-size: vw(18);
     }
-    .ico{
-        height:vw(25)
-    ;width: vw(25);
+
+    .ico {
+        height: vw(25);
+        width: vw(25);
     }
+
+}
+
+.go-top {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    z-index: 99;
+
 }
