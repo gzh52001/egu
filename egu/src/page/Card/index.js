@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import withLogin from '@/components/Hoc';
 import './style.scss';
 
 import { LeftOutlined, EllipsisOutlined } from '@ant-design/icons';
@@ -22,8 +22,12 @@ class Card extends Component {
         ]
     }
     jumpRout(rout){
-        this.props.history.push(rout);
+        // this.props.history.push(rout);
+        console.log(1)
     }
+
+    componentDidMount(){}
+
     render() {
         const {list}=this.state;
         return (
@@ -78,4 +82,5 @@ class Card extends Component {
     }
 }
 
+Card = withLogin(Card)
 export default Card;

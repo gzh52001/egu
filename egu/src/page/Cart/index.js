@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import Gyl from "@/components/getGuessYouLike"
 import Top from "@/components/Top"
 import Cartbottom from "./bottom"
+import withLogin from '@/components/Hoc';
 import "./css.scss"
+
 class Cart extends Component{
     goback=()=>{
         const {history}= this.props;
         console.log(history);
         history.push("/category")
     }
+    componentDidMount(){}
+    
     render() {
+        console.log(this.state)
         return (<div className="cart">
              {/* top */}
              <Top 
@@ -40,5 +45,5 @@ class Cart extends Component{
                 </div>)
     }
 }
-
+Cart = withLogin(Cart)
 export default Cart;
