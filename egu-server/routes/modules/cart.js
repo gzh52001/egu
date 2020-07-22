@@ -4,17 +4,17 @@ const query = require("../../db/mysql"); // 导入执行sql语句模块
 const router = express.Router();
 
 
-let data = {
-    userId:"的发大水发多少",
-    goodId:"的发大水发多少",
-    goodName:"的发大水发多少",
-    goodDesc:"的发大水发多少",
-    price:"的发大水发多少",
-    img:"的发大水发多少",
-    num:"的发大水发多少",
-    sum:"kjkjbjkbkbm",
-    isSelect:0,
-}
+// let data = {
+//     userId:"的发大水发多少",
+//     goodId:"的发大水发多少",
+//     goodName:"的发大水发多少",
+//     goodDesc:"的发大水发多少",
+//     price:"的发大水发多少",
+//     img:"的发大水发多少",
+//     num:"的发大水发多少",
+//     sum:"kjkjbjkbkbm",
+//     isSelect:0,
+// }
 
 // 添加
 router.post("/add",( req, res) => { 
