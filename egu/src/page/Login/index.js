@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react'
 import { withRouter} from 'react-router-dom'
 import {Form,Input,Button} from 'antd';
@@ -47,6 +48,7 @@ class Login extends Component {
                     <div className='navLift' onClick={this.goBack}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>用户登录</div>
                     <div className='navRight'><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
+
                 </header>
 
                 {/* 输入区 */}
@@ -82,7 +84,6 @@ class Login extends Component {
                         </Form.Item>
                     </Form>
                 </div>
-
             </div>
         )
     }

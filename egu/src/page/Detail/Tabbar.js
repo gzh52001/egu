@@ -4,8 +4,6 @@ import { withRouter } from "react-router-dom";
 import detailApi from "@/api/detail";
 import "./style/Tabbar.scss";
 
-import axios from "axios";
-
 import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/icons';
 
  class Tabbar extends Component {
@@ -13,25 +11,37 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
          super();
          this.addToCart = this.addToCart.bind(this);
      }
+
+     
     //  事件
     // 加入购物车
     addToCart() {
+
+        let { goodsId, goodsName, mallPrice } = this.props.goodInfo;
+        let { param2, goodsImg } = this.props.goodInfo.bseGoodsEo;
+        
+        // 如果该用户第一次加入该商品
         let data = {
-            userId:200,
-            goodId:123,
-            goodName:123,
-            goodDesc:123,
-            price:123,
-            img:123,
-            num:123,
-            sum:123,
+            userId:123,
+            goodId:goodsId,
+            goodName:goodsName,
+            goodDesc:param2,
+            price:mallPrice,
+            img:goodsImg,
+            num:1,
+            sum:mallPrice,
             isSelect:0,
         }
+
+        // 发送添加请求
         detailApi.addToCart(data).then(res => {
-            console.log(33333333333, res);
+            console.log(res);
         });
-        // axios.post("/api/aa").then(res => console.log(res));
         
+    }
+    buyNew=()=>{
+        this.addToCart()
+        this.props.history.push("/cart")
     }
     render() {
         return (
@@ -56,7 +66,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
                 <li className="botton-aciton cart" onClick={this.addToCart}>
                     加入购物车
                 </li>
-                <li className="botton-aciton buy">
+                <li className="botton-aciton buy" onClick={this.buyNew}>
                     立即购买
                 </li>
             </ul>

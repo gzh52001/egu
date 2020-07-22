@@ -1,5 +1,5 @@
 import require from "@/utils/require";
-import node_request from "@/utils/http";
+import request from "@/utils/http";
 
 // 获取详情页轮播图
 function getBannerImgs(id) {
@@ -22,10 +22,18 @@ function getDescImgs() {
 
 // 加入购物车
 function addToCart(data) {
-    return node_request({
+    return request({
         url: "/cart/add",
         method: "post",
         data
+    })
+}
+
+// 判断用户是否第一次加入该商品
+// userId goodId
+function isFirstAdd(data) {
+    return request.get("/cart/isFirstAdd", {
+        params: data
     })
 }
 
