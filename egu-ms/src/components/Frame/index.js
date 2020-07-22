@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { withRouter } from "react-router-dom";
 
-const { SubMenu } = Menu;
+import { adminRoute } from "../../routes";
+
+let menu = adminRoute.filter(item => item.isNav); // 返回是菜单项的路由配置
+console.log(menu);
 const { Header, Content, Sider, Footer } = Layout;
 
-export default class Frame extends Component {
+ class Frame extends Component {
+    //  切换菜单
+    handleMenuChange = (x) => {
+        this.props.history.push(x.key); // MenuItem 的key属性绑定的是路由路径，而且根据key判断高亮
+    }
     render() {
         return (
         <Layout>
@@ -19,14 +26,16 @@ export default class Frame extends Component {
                     <Sider width={200} className="site-layout-background">
                         <Menu
                             mode="inline"
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
+                            defaultSelectedKeys={menu[0].pathname}
                             style={{ height: '100%', borderRight: 0 }}
+                            onClick={this.handleMenuChange}
                         >
-                            <Menu.Item key="1">首页</Menu.Item>
-                            <Menu.Item key="2">商品管理</Menu.Item>
-                            <Menu.Item key="3">会员管理</Menu.Item>
-                            <Menu.Item key="4">购物车管理</Menu.Item>
+                            {
+                                menu.map(item => {
+                                return <Menu.Item key={item.pathname}>{item.title}</Menu.Item>
+                                })
+                            }
+                            
                         </Menu>
                     </Sider>
                     <Content
@@ -38,7 +47,7 @@ export default class Frame extends Component {
                         }}
                     >
 
-                        Content
+                        {this.props.children}
                     </Content>
                 </Layout>
             </Content>
@@ -47,3 +56,5 @@ export default class Frame extends Component {
         )
     }
 }
+
+export default withRouter(Frame)
