@@ -53,19 +53,10 @@
         .ant-row{ //buttom按钮
             margin-bottom:28px;
         }
-        input::-webkit-input-placeholder{ //placeholder文本颜色
-            color:red;
-        }
+      
         .ant-input{ //输入框
-            padding:0 0 0 14px;
+            font-size: 13px;
         }
-        h4{
-            margin-top: -vw(6);
-            color:rgb(132,134,137);
-            a{
-                color:black;
-                text-decoration:underline;
-            }
-           }
+       
        }
 }

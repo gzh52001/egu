@@ -52,11 +52,10 @@
 .login .login_box .button {
   background: #ffac0a;
   font-size: 3.73333vw;
-  margin-top: 8vw;
 }
 
 .login .login_box .ant-row {
-  margin-bottom: 33px;
+  margin-top: 37px;
 }
 
 .login .login_box input::-webkit-input-placeholder {
@@ -64,33 +63,22 @@
 }
 
 .login .login_box .ant-input {
-  padding: 0 0 0 14px;
+  font-size: 13px;
 }
 
-.login .login_box .verification {
-  top: 34.13333vw;
-  position: absolute;
-  margin-left: 1.6vw;
+.login .login_box .ant-form-item-explain, .login .login_box .ant-form-item-extra {
+  padding-top: 3px;
+  font-size: 14px;
 }
 
 .login .logname {
   width: 88vw;
   height: 5.06667vw;
-  margin: 0 auto;
-  margin-top: 21.33333vw;
+  margin-top: 28px;
 }
 
-.login .logname p {
+.login .logname span {
+  display: inline-block;
   height: 100%;
   line-height: 4.26667vw;
-}
-
-.login .logname .b1 {
-  float: left;
-}
-
-.login .logname .b2 {
-  float: right;
-  text-align: right;
-  color: red;
 }

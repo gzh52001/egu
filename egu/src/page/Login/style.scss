@@ -52,39 +52,31 @@
         .button{
             background:rgb(255,172,10);
             font-size:vw(14);
-            margin-top:vw(30)
+            // margin-top:vw(30)
         }
         .ant-row{ //Form.Item底部距离
-            margin-bottom:33px;
+            margin-top:37px;
         }
         input::-webkit-input-placeholder{ //placeholder文本颜色
             color:rgb(117,117,117);
         }
         .ant-input{ //输入框
-            padding:0 0 0 14px;
+           font-size: 13px;
         }
-        .verification{  //验证提示信息
-            top: vw(128);
-            position: absolute;
-            margin-left:vw(6)
+    
+        .ant-form-item-explain, .ant-form-item-extra{
+            padding-top: 3px;
+            font-size: 14px;
         }
     }
     .logname{
         width: vw(330);
         height:vw(19);
-        margin:0 auto;
-        margin-top: vw(80);
-        p{
+        margin-top: 28px;
+        span{
+            display: inline-block;
             height: 100%;
             line-height: vw(16);
-        }
-        .b1{
-            float:left;
-        }
-        .b2{
-            float: right;
-            text-align: right;
-            color:red;
-        }
+        } 
     }
 }

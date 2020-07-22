@@ -39,6 +39,7 @@ class Home extends Component{
     // 泰国椰青 id：138
     async getImgTaiGuo(){
         let {data} = await homeApi.getDataByIdAndImage(138);
+        console.log(data)
         this.setState({taiguoImg:data[0]})
     }
 
@@ -122,9 +123,9 @@ class Home extends Component{
                                 }
                             </Row>
                         </div>
-                        <div className="taiguo-img">
+                        {/* <div className="taiguo-img">
                             <img src={taiguoImg.img } alt="" />
-                        </div>
+                        </div> */}
                         <div className="swiper-img">
                             <div className="swiper-container">
                                 <div className="swiper-wrapper">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import withLogin from '@/components/Hoc';
 import Gyl from "@/components/getGuessYouLike"
 import Top from "@/components/Top"
 import Cartbottom from "./bottom"
@@ -7,6 +8,7 @@ import {DeleteOutlined} from '@ant-design/icons';
 import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
 import cartApi from '@/api/cart'
 import "./css.scss"
+
 import Pop from './../Bubble/bubble'
 class Cart extends Component{
     state={
@@ -168,5 +170,5 @@ class Cart extends Component{
                 </div>)
     }
 }
-
+Cart = withLogin(Cart)
 export default Cart;

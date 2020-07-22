@@ -59,7 +59,7 @@ router.post('/register',async (req,res)=>{
             }
         }
         res.send(info);
-    } catch (error) {
+    } catch (err) {
         let info = {
             code: err.errno,
             flag: false,
@@ -70,8 +70,8 @@ router.post('/register',async (req,res)=>{
 })
 
 // 登录
-router.get('/login',async (req,res) =>{
-    let {username,password} = req.query;
+router.post('/login',async (req,res) =>{
+    let {username,password} = req.body;
     try {
         let sql =`SELECT * FROM userinfo WHERE username = '${username}' AND password ='${password}'`;
         let p = await query(sql);
@@ -96,7 +96,7 @@ router.get('/login',async (req,res) =>{
         }
         // console.log('user',token)
         res.send(info)
-    } catch (error) {
+    } catch (err) {
         let info = {
             code: err.errno,
             flag: false,
@@ -107,8 +107,8 @@ router.get('/login',async (req,res) =>{
 })
 
 // 验证token
-router.get('/verify',(req,res)=>{
-    let {token} = req.query;
+router.post('/verify',(req,res)=>{
+    let {token} = req.body;
     let result = verify(token);
     // console.log(result)
     let info = {};
