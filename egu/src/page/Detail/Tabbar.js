@@ -1,26 +1,32 @@
 import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import cartActions from "@/store/action/cart";
 
 import detailApi from "@/api/detail";
+import cartApi from "@/api/cart";
 import "./style/Tabbar.scss";
 
 import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/icons';
 
+@withRouter
  class Tabbar extends Component {
-     constructor(){
+     constructor(props){
          super();
          this.state = {
-             userId:localStorage.getItem("egu_userId")
+             cartList:[],
+             userId:localStorage.getItem("egu_userId"),
+             count:0,
+             cartList2:props.cartList
          }
-        //  console.log(123, this.state.userId);
+        //  console.log("conse00", this.state.cartList2);
          this.addToCart = this.addToCart.bind(this);
      }
 
      
-    //  事件
+    //  事件-----------------
     // 加入购物车
-    addToCart() {
-
+    async addToCart() {
         let { goodsId, goodsName, mallPrice } = this.props.goodInfo;
         let { param2, goodsImg } = this.props.goodInfo.bseGoodsEo;
         
@@ -38,21 +44,57 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         }
 
         // 发送添加请求
-        detailApi.addToCart(data).then(res => {
-            console.log(res);
-        });
-        
+        let checkRes = await detailApi.isFirstAdd({userId:this.state.userId, goodsId});
+        // 是否第一次加入
+        if(Number(checkRes.code)) { // 第一次加入
+            let res = await detailApi.addToCart(data);
+            if(Number(res.code)) {
+                window.alert("添加成功")
+                this.getCartList();
+            } else {
+                window.alert("添加失败")
+            }
+        } else {  // 不是第一次，添加数量
+            let data = {
+                userId:this.state.userId,
+                goodsId,
+                type:1
+            }
+            let res = await cartApi.update(data);
+            if(Number(res.code)) {
+                window.alert("添加成功");
+            }
+        }
+
     }
+
+    // 立即购买
     buyNew=()=>{
         this.addToCart()
         this.props.history.push("/cart")
     }
 
+    // 获取购物车数据
+    getCartList = async () => {
+        let {userId} =  this.state;
+        try{
+            let res = await cartApi.getCartList(userId);
+            this.props.getCartList(res.data);
+            console.log("dispatch:", this.props);
+            this.setState({cartList:res.data}, () => {
+                this.setState({ // 更新购物车数量
+                    count:this.state.cartList.length
+                })
+            })
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     // 周期函数------------------
     componentDidMount() {
-        detailApi.isFirstAdd({userId:123, goodsId:"WZh3k1JuXoMw4khfV5hPy"}).then(res => {
-            console.log(222, res)
-        })
+       this.getCartList(); // 获取购物车列表
+       console.log(2222, this.props);
     }
     render() {
         return (
@@ -72,7 +114,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
                 <li className="icon-aciton">
                     <ShoppingCartOutlined />
                     <span>购物车</span>
-                    <i>0</i>
+                    <i>{this.state.count}</i>
                 </li>
                 <li className="botton-aciton cart" onClick={this.addToCart}>
                     加入购物车
@@ -84,5 +126,16 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         )
     }
 }
+// 是一个函数,把redux里的状态映射到props
+let mapSateTopProps = state => {
+    return state.cart
+}
 
-export default withRouter(Tabbar)
+// dispach后自动更新state,不用订阅
+let mapDispatchToProps = cartActions;
+
+// 通过connet高阶组件给props添加东西
+Tabbar = connect(mapSateTopProps, mapDispatchToProps)(Tabbar)
+
+export default Tabbar
+

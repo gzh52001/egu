@@ -1,10 +1,28 @@
+import { CHANGE_COUNT, GET_CART_LIST } from "../actionType/cart";
+
 const initState = {
-    cartList: [],
+    cartList: [], // 购物车列表
     count:0, // 购物车数量
 }
 
-function reducer(state = initState, action) {
 
+function reducer(preState = initState, action) {
+    const newState = {...preState}; // 不能改传入的参数
+    switch(action.type) {
+        // 改变数量
+        case CHANGE_COUNT: 
+            newState.count = newState.cartList.length;
+            return newState;
+        // 获取购物车数据
+        case GET_CART_LIST:
+            // console.log("reducer", action.cartList);
+            newState.cartList = [...action.cartList];
+            newState.count = newState.cartList.length;
+            return newState;
+        default:
+            return newState;
+
+    }
 }
 
 export default reducer;

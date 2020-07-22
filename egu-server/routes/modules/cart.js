@@ -65,7 +65,7 @@ router.get("/isFirstAdd", async (req, res) => {
         }
 });
 
-// 查询：用户购物车数据
+// 查询：查询所有用户购物车数据
 router.get("/search/:userId", async (req, res) => {
     let { userId } = req.params;
     let sql = `select * from cart where userId = ${userId}`;
@@ -148,10 +148,11 @@ router.put("/update", async (req, res) => {
 
 // 删除: userId goodsId 
 router.delete("/del", async (req, res) => {
+    console.log(req.body);
     try {
         // 前端数据
         let { userId, goodsId } = req.body;
-
+        console.log(req.body);
         // sql语句
         let sql = `DELETE FROM cart WHERE userId = "${userId}" AND goodsId = "${goodsId}"`;
 

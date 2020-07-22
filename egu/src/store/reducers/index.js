@@ -4,7 +4,7 @@ import userReducer from './user';
 
 // 把多个reducer合并成一个reducer
 const reducer = combineReducers({
-    // cart:cartReducer,
+    cart:cartReducer,
     user:userReducer
 })
 
