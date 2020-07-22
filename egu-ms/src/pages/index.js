@@ -3,8 +3,6 @@ import Loadable from 'react-loadable'
 import Loading from '../components/loading'
 
 
-
-
 const Home = Loadable({
     loader: () => import('./Home'),
     loading: Loading
