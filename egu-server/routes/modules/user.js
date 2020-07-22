@@ -75,6 +75,7 @@ router.post('/login',async (req,res) =>{
     try {
         let sql =`SELECT * FROM userinfo WHERE username = '${username}' AND password ='${password}'`;
         let p = await query(sql);
+        // console.log(p[0].id)
         let info ={};
         let token=''
         if(p.length){
@@ -83,7 +84,8 @@ router.post('/login',async (req,res) =>{
                 code:2000,
                 status:true,
                 data:{
-                    token
+                    token,
+                    userId:p[0].id
                 },
                 msg:'登录成功'
             }

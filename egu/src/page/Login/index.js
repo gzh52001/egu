@@ -1,4 +1,12 @@
-import React, { Component } from 'react'
+
+import React, {Component} from 'react'
+import { withRouter} from 'react-router-dom'
+import {Form,Input,Button} from 'antd';
+import {LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
+import {Toast} from 'antd-mobile';
+import userApi from '@/api/user'
+
+import Pop from './../Bubble/bubble'
 import './style.scss'
 import { LeftOutlined } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
@@ -10,13 +18,33 @@ class Login extends Component {
         this.props.history.push(rout);
     }
 
-    render() {
-        const verification = {  //输入框验证
-            required: '你还没有输入任何内容!',
-        };
+    goBack = () => {
+        this.props.history.push('/mine');
+    }
 
-        return (
-            <div className='login'>
+    onFinish = async (value) => {
+        let { username, password } = value;
+        let res = await userApi.Login(username, password)
+        // console.log(res)
+        if (res.status) {
+            // 验证token
+            let result = await userApi.verifyToken(res.data.token);
+            if (result.status) {
+                // 验证成功 存token
+                localStorage.setItem('egu_token', res.data.token);
+                localStorage.setItem('egu_username', username);
+                localStorage.setItem('egu_userId', res.data.userId);
+                Toast.info('登录成功')
+                this.props.history.push('/mine');
+            }else{
+                Toast.info('token异常，请重试')
+            }
+        } else {
+            Toast.info('账号或密码错误')
+        }
+    }
+    render(){
+        <div className='login'>
                 {/* 头部 */}
                 <header>
                     <div className='navLift' onClick={this.jumpRout.bind(this, '/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
@@ -51,7 +79,8 @@ class Login extends Component {
                     <p className="b2">忘记密码</p>
                 </div>
             </div>
-        )
     }
-}
+       
+    }
+
 export default Login;
