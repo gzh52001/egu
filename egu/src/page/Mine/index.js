@@ -1,30 +1,51 @@
 import React, { Component } from 'react'
-import { NavBar, Icon,Grid, } from 'antd-mobile';
+import { Grid, } from 'antd-mobile';
 import { data ,data2,data3  } from "./data";  
 import  Gyl from "../../components/getGuessYouLike";
-import GoTop from "../../components/GoTop"
 import Top from "@/components/Top"
 import './style.scss';
-import Pop from './../Bubble/bubble'
+import { SettingOutlined} from '@ant-design/icons';
 
 class Mine extends Component{
+    state={
+        childrenMsg:"",
+        yon:false
+    }
+    getChildrenMsg = (result, msg) => {
+        this.setState({
+            childrenMsg: msg
+        },()=>{
+         const top = this.state.childrenMsg
+        //  console.log(top);
+           if(top > 60){
+            this.state.yon=true
+           }else if(top < 100){
+               
+            this.state.yon=false
+           }
+        })
+    }
+    
     componentDidMount(){
-        console.log(window.scrollY);
+        this.getChildrenMsg();
     }
     render() {
+        const{yon}=this.state;
         return (
             <div className="mine">
                         {/* 导航栏 */}
             <div className="top">
-                <Top 
+              {yon?  <Top 
                     left = {<img src="http://m.egu365.com/img/not_user.jpg" style={{borderRadius:"50%",width:"65%"}}></img>}
-                    right = {<Pop />}
+                    right = {<SettingOutlined style={{
+                        fontSize:"5.8vw",color:"#c0c0c0"}}/>}
                     center = {{
                         contentStyle:{fontWeight:600,}
                     }}
                 >
                    <span style={{fontSize:"17.25px"}}>我的</span>
-                </Top>
+                </Top> :<div className="top-icon"><SettingOutlined  style={{
+                        fontSize:"5.8vw",color:"#fff"}}/></div>}
             </div>
                         {/* 头部 */}
             <div className="user-wrap">
@@ -78,7 +99,7 @@ class Mine extends Component{
                         {/* 猜你喜欢*/}
             <div className='guess-you-like'>
                 <img src='http://m.egu365.com/img/guess_you_like.jpg'/>
-                <Gyl/>
+                <Gyl  parent={ this }/>
                 {/* <GoTop/> */}
             </div>
 
