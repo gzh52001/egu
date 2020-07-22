@@ -9,6 +9,10 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
  class Tabbar extends Component {
      constructor(){
          super();
+         this.state = {
+             userId:localStorage.getItem("egu_userId")
+         }
+        //  console.log(123, this.state.userId);
          this.addToCart = this.addToCart.bind(this);
      }
 
@@ -22,7 +26,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         
         // 如果该用户第一次加入该商品
         let data = {
-            userId:123,
+            userId:this.state.userId,
             goodsId,
             goodsName,
             param2,
@@ -42,6 +46,13 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
     buyNew=()=>{
         this.addToCart()
         this.props.history.push("/cart")
+    }
+
+    // 周期函数------------------
+    componentDidMount() {
+        detailApi.isFirstAdd({userId:123, goodsId:"WZh3k1JuXoMw4khfV5hPy"}).then(res => {
+            console.log(222, res)
+        })
     }
     render() {
         return (
