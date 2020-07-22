@@ -130,6 +130,142 @@ router.post('/verify',(req,res)=>{
         res.send(info);
 })
 
+// 获取所有用户
+router.get('/alluser',async (req,res)=>{
+    try {
+        let sql = 'SELECT * FROM userinfo ';
+        let data =await query(sql);
+        let info = {};
+        if(data.length){
+            info ={
+                code:2000,
+                status:true,
+                data,
+                msg:'查询成功'
+            }
+        }else{
+            info ={
+                code:3000,
+                status:false,
+                msg:'查询失败'
+            }  
+        }
+        res.send(info);
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
+// 删除用户
+router.delete('/del/:id', async (req,res)=>{
+    let {id} = req.params;
+    let sql = `DELETE FROM userinfo WHERE id=${id}`;
+    try {
+        let p = await query(sql);
+        let info ={}
+        if(p.affectedRows){
+            // 删除成功
+             info={
+                code:2000,
+                    status:true,
+                    msg:'删除成功' 
+             }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'删除失败'
+            }
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
+// 查询用户
+router.get('/searchuser/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {username} = req.query;
+    let sql = `SELECT * FROM userinfo WHERE id='${id}' OR username='${username}'`
+    try {
+        let data = await query(sql);
+        let info={};
+        if(data.length){
+            info={
+                code:2000,
+                status:true,
+                data,
+                msg:'查询成功' 
+             }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'查询失败' 
+             }
+        }
+        res.send(info);
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
+
+// 分页查询 查询用户列表
+router.get('/userlist',async (req,res)=>{
+    let {page,size} = req.query;
+    page = page || 1;
+    size = size || 5;
+    let index = (page - 1) * size; // 当前第几页
+    let sql = `SELECT * FROM userinfo LIMIT ${index}, ${size} `;
+    let sql1 = `SELECT * FROM userinfo`; // 总数据列表
+    try {
+        let data = await query(sql);
+        let total = await query(sql1);
+        let info={};
+        if(data.length){
+            info={
+                code:2000,
+                status:true,
+                data,
+                total:total.length,
+                page,
+                size,
+                msg:'查询成功' 
+             }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'暂无数据' 
+             }
+        }
+        res.send(info);
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
 
 
 module.exports = router;

@@ -11,6 +11,12 @@
 .top {
     position: absolute;
 }
+.top-icon{
+    z-index: 6;
+    position: absolute;
+    top: 3vw;
+    left: 93vw;
+}
 
 img {
     max-width: 100%;
