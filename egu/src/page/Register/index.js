@@ -12,6 +12,7 @@ import { LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
 import {Toast} from 'antd-mobile';
 import Pop from './../Bubble/bubble'
 import userApi from '@/api/user';
+import {connect} from 'react-redux'
 import './style.scss'
 
 
@@ -104,4 +105,14 @@ function Register(props) {
 
 }
 
-export default Register;
+// export default Register;
+export default connect((state)=>{
+    console.log(state)
+    return {
+    }
+},(dispatch=>{
+    console.log(dispatch)
+    return {
+        
+    }
+}))(Register);

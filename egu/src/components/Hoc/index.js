@@ -1,5 +1,8 @@
 import React from 'react'
 import Login from '@/page/Login';
+// import store from '@/store/store'
+// let {user} = store.getState();
+
 
 // 反向继承 拦截
 function withLogin(InnerCompoent) {
