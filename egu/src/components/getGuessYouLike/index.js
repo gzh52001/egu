@@ -9,10 +9,15 @@ class Gyl extends Component{
         list:[],
         isBottom:false,//不需要发数据
         pageNo:2,
-        isShowTop:false
+        isShowTop:false,
+        msg:""
     }
     goToTop=()=>{
         window.scrollTo(0,0);
+    }
+    toParent = () => {
+        this.props.parent.getChildrenMsg(this,this.state.msg)
+     
     }
   async  componentDidMount(){
        let res = await getGYL.getGuessYouLike(1);
@@ -44,7 +49,11 @@ class Gyl extends Component{
                 isShowTop:false
             })
         }
-
+        this.setState({
+            msg:window.scrollY
+        })
+        this.toParent();
+        // console.log("g",this.state.msg);
         if(scrollTop + clientHeight >=scrollHeight - 60 && !this.state.isBottom){
             this.setState({
                 isBottom:true,//到达底部需要发送数据
