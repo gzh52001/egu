@@ -1,89 +1,21 @@
 import React, { Component } from 'react'
 import './style.scss'
-<<<<<<< HEAD
-import { LeftOutlined, EllipsisOutlined, HomeOutlined, AppstoreOutlined, UserOutlined, ShoppingCartOutlined, ShopOutlined } from '@ant-design/icons';
-=======
 import { LeftOutlined } from '@ant-design/icons';
->>>>>>> jiangzb
 import { Form, Input, Button } from 'antd';
 import Pop from '../Bubble/bubble' //引入气泡组件
 
-<<<<<<< HEAD
-
-import { Popover } from 'antd-mobile';
-const Item = Popover.Item;
-class Login extends Component {
-    state = {
-        visible: false,
-        selected: '',
-        bubbleList: [{
-            id: 1,
-            title: '首页',
-            path: '/home',
-            icon: <HomeOutlined style={{ fontSize: '13px', marginRight: '6px' }} />
-        },
-        {
-            id: 1,
-            title: '分类',
-            path: '/category',
-            icon: <AppstoreOutlined style={{ fontSize: '13px', marginRight: '6px' }} />
-        },
-        {
-            id: 1,
-            title: '宅配',
-            path: '/mine',
-            icon: <ShopOutlined style={{ fontSize: '13px', marginRight: '6px' }} />
-        },
-        {
-            id: 1,
-            title: '购物车',
-            path: '/cart',
-            icon: <ShoppingCartOutlined style={{ fontSize: '13px', marginRight: '6px' }} />
-        },
-        {
-            id: 1,
-            title: '我的',
-            path: '/mine',
-            icon: <UserOutlined style={{ fontSize: '13px', marginRight: '6px' }} />
-        }
-        ]
-    };
-
-
-=======
 class Login extends Component {
 
->>>>>>> jiangzb
     jumpRout(rout) {
         this.props.history.push(rout);
     }
 
-<<<<<<< HEAD
-
-    onSelect = (opt) => {  //选中触发方法
-        this.setState({
-            visible: false,
-            /*  selected: opt.props.value, */
-        });
-        // this.props.history.push(opt.props.value);
-       this.jumpRout(opt.props.value)
-    };
-
-
-
-
-
-=======
->>>>>>> jiangzb
     render() {
         const verification = {  //输入框验证
             required: '你还没有输入任何内容!',
         };
 
-<<<<<<< HEAD
         let { bubbleList } = this.state;
-=======
->>>>>>> jiangzb
         return (
             <div className='login'>
                 {/* 头部 */}
@@ -91,53 +23,8 @@ class Login extends Component {
                     <div className='navLift' onClick={this.jumpRout.bind(this, '/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>用户登录</div>
                     <div className='navRight'>
-<<<<<<< HEAD
-                        <Popover mask //遮罩层开启
-                            visible={this.state.visible}  //遮罩状态
-                            overlay={[
-                            bubbleList.map(item =>(<Item key={item.id} value={item.path} style={{ fontSize: '12px' }}> {item.icon} {item.title}</Item>),
-                                )
-                            ]}
-                            align={{   //气泡位置
-                                overflow: { adjustY: 0, adjustX: 0 },
-                                offset: [-23, 0],
-                            }}
-                            onSelect={this.onSelect}   //选中函数回调
-                        >
-                            <div style={{  //气泡框位置
-                                height: '100%',
-                                padding: '0 15px',
-                                marginRight: '-15px',
-                                display: 'flex',
-                                alignItems: 'center',
-                            }}
-                            >
-                                <EllipsisOutlined style={{ fontSize: '26px', margin: '5px 0 0 -3px' }} />
-                            </div>
-                        </Popover>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
                         {/* 使用气泡组件 */}
                         <Pop />
->>>>>>> jiangzb
                     </div>
                 </header>
 

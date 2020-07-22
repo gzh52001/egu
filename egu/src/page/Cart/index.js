@@ -5,6 +5,7 @@ import Cartbottom from "./bottom"
 import {DeleteOutlined} from '@ant-design/icons';
   
 import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
+import cartApi from '@/api/cart'
 import "./css.scss"
 import Pop from './../Bubble/bubble'
 class Cart extends Component{
@@ -39,10 +40,7 @@ class Cart extends Component{
             }
        })
       }
-    // isSelectClick=()=>{
-        
-    //  return this.state.cartData.every(ite =>ite.isSelect)
-    // }
+   
 
     // 單選
     singleChange = (id) => {
@@ -79,10 +77,13 @@ class Cart extends Component{
         })
         
     }
+
+    getCartList=async ()=>{
+        let res = await cartApi.getcartlist()
+    }
+
     componentDidMount() {
-        // this.setState({
-        //     isAllSelect:this.state.cartData.every(item => item.isSelect)
-        // })
+       
     }
 
     render() {
