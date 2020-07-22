@@ -5,6 +5,7 @@ import {Form,Input,Button} from 'antd';
 import {LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
 import {Toast} from 'antd-mobile';
 import userApi from '@/api/user'
+import Pop from './../Bubble/bubble'
 import './style.scss'
 
 class Login extends Component {
@@ -47,7 +48,10 @@ class Login extends Component {
                 <header>
                     <div className='navLift' onClick={this.goBack}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>用户登录</div>
-                    <div className='navRight'><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
+                    <div className='navRight'>
+                        {/* <EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /> */}
+                        <Pop />
+                    </div>
 
                 </header>
 

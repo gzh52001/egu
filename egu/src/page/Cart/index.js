@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import withLogin from '@/components/Hoc';
 import Gyl from "@/components/getGuessYouLike"
 import Top from "@/components/Top"
 import Cartbottom from "./bottom"

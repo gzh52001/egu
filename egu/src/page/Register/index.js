@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
 import {Toast} from 'antd-mobile';
-
+import Pop from './../Bubble/bubble'
 import userApi from '@/api/user';
 import './style.scss'
 
@@ -54,9 +54,12 @@ function Register(props) {
         <div className="register">
             {/* 头部 */}
             <header>
-            <div className='navLift' onClick={jumpRout}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
-            <div className='navTitle'>依谷注册</div>
-            <div className='navRight'><EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /></div>
+                <div className='navLift' onClick={jumpRout}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
+                <div className='navTitle'>依谷注册</div>
+                <div className='navRight'>
+                    {/* <EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /> */}
+                    <Pop />
+                </div>
             </header>
 
             {/* 输入区 */}
