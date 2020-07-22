@@ -5,6 +5,7 @@ import {Form,Input,Button} from 'antd';
 import {LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
 import {Toast} from 'antd-mobile';
 import userApi from '@/api/user'
+
 import Pop from './../Bubble/bubble'
 import './style.scss'
 
@@ -22,6 +23,7 @@ class Login extends Component {
     onFinish = async (value) => {
         let { username, password } = value;
         let res = await userApi.Login(username, password)
+        // console.log(res)
         if (res.status) {
             // 验证token
             let result = await userApi.verifyToken(res.data.token);
@@ -29,6 +31,7 @@ class Login extends Component {
                 // 验证成功 存token
                 localStorage.setItem('egu_token', res.data.token);
                 localStorage.setItem('egu_username', username);
+                localStorage.setItem('egu_userId', res.data.userId);
                 Toast.info('登录成功')
                 this.props.history.push('/mine');
             }else{
