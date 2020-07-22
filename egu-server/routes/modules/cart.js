@@ -5,14 +5,14 @@ const router = express.Router();
 
 
 // let data = {
-//     userId:"的发大水发多少",
-//     goodId:"的发大水发多少",
-//     goodName:"的发大水发多少",
-//     goodDesc:"的发大水发多少",
-//     price:"的发大水发多少",
-//     img:"的发大水发多少",
-//     num:"的发大水发多少",
-//     sum:"kjkjbjkbkbm",
+//     userId:123,
+//     goodsId,
+//     goodsName,
+//     param2,
+//     mallPrice,
+//     goodsImg,
+//     num:1,
+//     sum:mallPrice,
 //     isSelect:0,
 // }
 
@@ -20,9 +20,9 @@ const router = express.Router();
 router.post("/add",( req, res) => { 
     let keys = Object.keys(req.body);
     let data = Object.values(req.body);
-    let {userId, goodId, goodName, goodDesc, price, img, num, sum, isSelect} = req.body;
+    let {userId, goodsId, goodsName, param2, mallPrice, goodsImg, num, sum, isSelect} = req.body;
     // sql语句
-    let sql = `INSERT INTO cart(${keys.join()}) VALUES('${userId}','${goodId}','${goodName}', '${goodDesc}', '${price}', '${img}', '${num}', '${sum}', ${isSelect})`;
+    let sql = `INSERT INTO cart(${keys.join()}) VALUES('${userId}','${goodsId}','${goodsName}', '${param2}', '${mallPrice}', '${goodsImg}', '${num}', '${sum}', ${isSelect})`;
     
     // 执行sql语句
     query(sql).then(result => {
@@ -47,8 +47,8 @@ router.post("/add",( req, res) => {
 router.get("/isFirstAdd", async (req, res) => {
     // params 动态路由参数
     // query 查询字符串
-    let {userId, goodId} = req.query;
-    let sql = `select * from cart where userId = '${userId}' and goodId = '${goodId}'`;
+    let {userId, goodsId} = req.query;
+    let sql = `select * from cart where userId = '${userId}' and goodsId = '${goodsId}'`;
     let result = await query(sql);
         if(!result.length) {
             res.send({
@@ -91,17 +91,17 @@ router.get("/search/:userId", async (req, res) => {
 })
 
 // 修改：购物车数量 加：type:1   减 type:0   更新：num sum
-// userId goodId
+// userId goodsId
 router.put("/update", async (req, res) => {
     try {
-        let {userId, goodId, type } = req.body;
+        let {userId, goodsId, type } = req.body;
     // res.send(req.body);
     // 查询原来信息
-    let sql = `select * from cart where userId = '${userId}' and goodId = '${goodId}'`;
+    let sql = `select * from cart where userId = '${userId}' and goodsId = '${goodsId}'`;
     // 执行查询
     let result = await query(sql);
 
-    let { num, price } = result[0];
+    let { num, mallPrice } = result[0];
 
     // 判断加减
     if(type == 1) {
@@ -118,15 +118,15 @@ router.put("/update", async (req, res) => {
         num = Number(num) - 1;
     }
 
-    let sum = Number(price) * Number(num); // 新的总价
+    let sum = Number(mallPrice) * Number(num); // 新的总价
 
-    let updateSql = `UPDATE cart SET num=${num},sum=${sum} WHERE userId = '${userId}' AND goodId = '${goodId}'`
+    let updateSql = `UPDATE cart SET num=${num},sum=${sum} WHERE userId = '${userId}' AND goodsId = '${goodsId}'`
 
     // 执行更新
     let updateRes = await query(updateSql);
 
     if(updateRes.affectedRows) {
-        let sql = `select * from cart where userId = '${userId}' and goodId = '${goodId}'`;
+        let sql = `select * from cart where userId = '${userId}' and goodsId = '${goodsId}'`;
         let result = await query(sql);
         res.send({
             code:1,
@@ -145,21 +145,21 @@ router.put("/update", async (req, res) => {
     } 
 })
 
-// 删除: userId goodId 
+// 删除: userId goodsId 
 router.delete("/del", async (req, res) => {
     try {
         // 前端数据
-        let { userId, goodId } = req.body;
+        let { userId, goodsId } = req.body;
 
         // sql语句
-        let sql = `DELETE FROM cart WHERE userId = "${userId}" AND goodId = "${goodId}"`;
+        let sql = `DELETE FROM cart WHERE userId = "${userId}" AND goodsId = "${goodsId}"`;
 
         // 执行sql语句
         let result = await query(sql);
         
         // 返回结果
         if(result.affectedRows) {
-            let sql = `select * from cart where userId = '${userId}' and goodId = '${goodId}'`;
+            let sql = `select * from cart where userId = '${userId}' and goodsId = '${goodsId}'`;
             let result = await query(sql);
             res.send({
                 code: 1,

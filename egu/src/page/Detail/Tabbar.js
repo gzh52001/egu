@@ -23,11 +23,11 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         // 如果该用户第一次加入该商品
         let data = {
             userId:123,
-            goodId:goodsId,
-            goodName:goodsName,
-            goodDesc:param2,
-            price:mallPrice,
-            img:goodsImg,
+            goodsId,
+            goodsName,
+            param2,
+            mallPrice,
+            goodsImg,
             num:1,
             sum:mallPrice,
             isSelect:0,
