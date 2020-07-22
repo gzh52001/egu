@@ -1,95 +1,57 @@
-
-import React, {Component} from 'react'
-import { withRouter} from 'react-router-dom'
-import {Form,Input,Button} from 'antd';
-import {LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
-import {Toast} from 'antd-mobile';
-import userApi from '@/api/user'
-import Pop from './../Bubble/bubble'
+import React, { Component } from 'react'
 import './style.scss'
+import { LeftOutlined } from '@ant-design/icons';
+import { Form, Input, Button } from 'antd';
+import Pop from '../Bubble/bubble' //引入气泡组件
 
 class Login extends Component {
 
-    goReg = () => {
-        this.props.history.push('/register');
-
+    jumpRout(rout) {
+        this.props.history.push(rout);
     }
 
-    goBack = () => {
-        this.props.history.push('/mine');
-    }
+    render() {
+        const verification = {  //输入框验证
+            required: '你还没有输入任何内容!',
+        };
 
-    onFinish = async (value) => {
-        let { username, password } = value;
-        let res = await userApi.Login(username, password)
-        if (res.status) {
-            // 验证token
-            let result = await userApi.verifyToken(res.data.token);
-            if (result.status) {
-                // 验证成功 存token
-                localStorage.setItem('egu_token', res.data.token);
-                localStorage.setItem('egu_username', username);
-                Toast.info('登录成功')
-                this.props.history.push('/mine');
-            }else{
-                Toast.info('token异常，请重试')
-            }
-        } else {
-            Toast.info('账号或密码错误')
-        }
-    }
-
-
-    render(){
         return (
             <div className='login'>
-
                 {/* 头部 */}
                 <header>
-                    <div className='navLift' onClick={this.goBack}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
+                    <div className='navLift' onClick={this.jumpRout.bind(this, '/mine')}><LeftOutlined style={{ fontSize: '20px', margin: '8px 0 0 8px' }} /></div>
                     <div className='navTitle'>用户登录</div>
                     <div className='navRight'>
-                        {/* <EllipsisOutlined style={{ fontSize: '26px', margin: '8px 0 0 14px' }} /> */}
+                        {/* 使用气泡组件 */}
                         <Pop />
                     </div>
-
                 </header>
 
                 {/* 输入区 */}
                 <div className='login_box'>
-                    <Form className="login-form" onFinish = {this.onFinish}>
-                        <Form.Item
-                         name="username"
-                         rules={[{ required: true, message: '用户名不能为空' }]}
-                         style = {{height:44}}
-                        >
-                            <Input 
-                            className='cardNumber' 
-                            style={{ outline: 'medium' }} 
-                            placeholder="请输入用户名"  
-                            />
+                    <Form className="login-form" validateMessages={verification}>
+                        <Form.Item name={['']} rules={[{ required: true }]}>
+                            <Input className='cardNumber' style={{ outline: 'medium' }} placeholder="请输入用户名/手机号/邮箱" />
                         </Form.Item>
-                        <Form.Item
-                         name="password"
-                         rules={[
-                            { required: true, message: '密码不能为空' },
-                            {max:10,min:6,message:'密码长度在6-15之间'}]}
-                         style = {{height:44}}
-                        >
-                            <Input.Password className='cardPass'  placeholder="请输入6位以上的密码" />
+                        <Form.Item name={['mima']} rules={[{ types: 'mima' }]}>
+                            <Input className='cardPass' type="password" placeholder="请输入6位以上的密码" />
                         </Form.Item>
-                        <div className="logname">
-                            <span className="b1" onClick={this.goReg}>点击注册</span>
-                        </div>
-                        <Form.Item style={{marginTop:9}}>
+                        {/*  <Form.Item className='verification'>
+                        <h4 style={{ fontSize: '9px', color: 'red' }}>* 请输入用户名/手机号/邮箱</h4>
+                    </Form.Item> */}
+                        <Form.Item>
                             <Button type="primary" className="button" htmlType="submit">
                                 立即登录
-                            </Button>
+                        </Button>
                         </Form.Item>
                     </Form>
+                </div>
+                <div className="logname">
+                    <p className="b1" onClick={this.jumpRout.bind(this, '/register')}>手机快速注册</p>
+                    <p className="b2">忘记密码</p>
                 </div>
             </div>
         )
     }
 }
-export default withRouter(Login);
+export default Login;
