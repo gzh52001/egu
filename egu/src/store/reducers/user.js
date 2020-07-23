@@ -1,7 +1,7 @@
 const initState = {
     logined: false,
-    egu_username:localStorage.getItem('egu_username'),
-    egu_token:localStorage.getItem('egu_token')
+    egu_username: localStorage.getItem('egu_username'),
+    egu_token: localStorage.getItem('egu_token'),
 }
 
 function reducer(state = initState, action) {
@@ -17,13 +17,13 @@ function reducer(state = initState, action) {
         case 'logout':
             return {
                 ...state,
-               logined:false,
-               egu_username:'',
-               egu_token:'',
-               egu_userId:''
+                logined: false,
+                egu_username: '',
+                egu_token: '',
+                egu_userId: ''
             }
-        default:
-            return state
+                default:
+                    return state
     }
 }
 

@@ -15,6 +15,16 @@ class Mine extends Component{
             yon: msg
         })
     }
+
+    toInfo=()=>{
+        let token = localStorage.getItem('egu_token');
+        let username = localStorage.getItem('egu_username');
+        if(token && username){
+            this.props.history.push("/mine/info")
+        }else{
+            this.props.history.push("/login")
+        }
+    }
     
     componentDidMount(){
         this.getChildrenMsg();
@@ -28,13 +38,14 @@ class Mine extends Component{
               {yon ?  <Top 
                     left = {<img src="http://m.egu365.com/img/not_user.jpg" style={{borderRadius:"50%",width:"65%"}}></img>}
                     right = {<SettingOutlined style={{
-                        fontSize:"5.8vw",color:"#c0c0c0"}}/>}
+                    fontSize:"5.8vw",color:"#c0c0c0"}}  onClick={this.toInfo}/>}
                     center = {{
                         contentStyle:{fontWeight:600,}
                     }}
+                   
                 >
                    <span style={{fontSize:"17.25px"}}>我的</span>
-                </Top> :<div className="top-icon"><SettingOutlined  style={{
+                </Top> :<div className="top-icon" onClick={this.toInfo}><SettingOutlined  style={{
                         fontSize:"5.8vw",color:"#fff"}}/></div>}
             </div>
                         {/* 头部 */}

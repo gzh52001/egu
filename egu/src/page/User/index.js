@@ -1,43 +1,67 @@
 import React, { Component } from 'react'
-import Pop from '@/page/Bubble/bubble'
+import { Button,Upload } from 'antd';
+import { DatePicker, List,Picker,Modal,Toast } from 'antd-mobile';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import Pop from '@/page/Bubble/bubble'
+import userApi from '@/api/user'
 import './style.scss'
-import { Button } from 'antd';
+
+const prompt = Modal.prompt;
+const dateNow = new Date(Date.now());
+const id =localStorage.getItem('egu_userId')
+
 
 class User extends Component {
   state = {
-    userList: [
+    date:dateNow,
+    sex: [
       {
-        id: 1,
-        title: '用户名',
-        details: '1234567'
+        label: '男',
+        value: '男',
       },
       {
-        id: 2,
-        title: '手机号',
-        details: '13131312758'
+        label: '女',
+        value: '女',
       },
       {
-        id: 3,
-        title: '性 别',
-        details: '保密'
+        label: '保密',
+        value: '保密',
       },
-      {
-        id: 4,
-        title: '出生日期',
-        details: '2020-07-07'
-      },
-    ]
+    ],
+    currentSex:['女'],
+    currentTel:['13564865880'],
+    curUsername:localStorage.getItem('egu_username'),
+    curAvatar:localStorage.getItem('egu_avatar')
   }
 
   jumpRout(rout) {
     this.props.history.push(rout);
   }
 
+  handleChange=(info)=>{
+    if (info.file.status !== 'uploading') {
+      // console.log(info.file.response.data, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      // console.log(info.file.response)
+      localStorage.setItem('egu_avatar',info.file.response.data.imgurl)
+      this.setState({curAvatar:info.file.response.data.imgurl})
+      Toast.info('修改成功')
+    } else if (info.file.status === 'error') {
+      Toast.info('修改失败')
+    }
+  }
+
+  changeUsername=async (val)=>{
+    console.log(val)
+    let res =await userApi.checkname(val)
+    console.log(res)
+  }
+  
+
+
   render() {
-
-    const { userList } = this.state;
-
+    const { sex,date,currentSex,currentTel,curUsername,curAvatar } = this.state;
     return (
       <div className='user'>
 
@@ -51,33 +75,78 @@ class User extends Component {
         </header>
 
         {/* 内容区 */}
-        <div style={{width:'100%',height:'300px',background:'#fff'}}>
+        <div style={{width:'100%',height:'260px',background:'#fff'}}>
           <ul>
             <li style={{ height: '76px' }}>
-              <p>
-                <span style={{ lineHeight: '60px' }}>头 像</span>
-                <img alt='' src='http://oss.egu365.com/upload/eb89dd61970d4521b807ce731dca8026.jpeg'></img>
-              </p>
-              <RightOutlined style={{ color: 'rgb(212, 211, 211)', marginTop: '20px' }} />
+              
+                <span style={{ lineHeight: '76px',float:'left' }}>
+                  头 像
+                </span>
+                <RightOutlined style={{ color:'#bbb', marginTop: '28px',fontSize:18,float:'right',paddingRight:13 }} />
+                <span style={{width:70, height:70,float:'right',overflow:'hidden',borderRadius:'50%',marginTop:2}}>
+                  <Upload 
+                   name='avatar'
+                   action='/api/upload/touxiang'
+                   data={ {id:id} }
+                   onChange={this.handleChange}>
+                    <img alt='' src={curAvatar} />
+                  </Upload>
+                </span>
+             
             </li>
-            {
-              userList.map(item => {
-                return (
-                  <li key={item.id}>
-                    <p>
-                      <span>{item.title}</span>
-                      <span style={{ float: 'right' }}>{item.details}</span>
-                    </p>
-                    <RightOutlined style={{ color: 'rgb(212, 211, 211)', marginTop: '14px' }} />
-                  </li>
-                )
-              })
-            }
+
+            <li onClick={() => prompt('修改用户名', '',  [
+                { text: '取消' },
+                { text: '确认', callbackOrActions: async (val)=>{
+                    let res=await userApi.checkname(val)
+                    console.log(res);
+                } },
+              ], 'default', '100')}>
+              <span style={{float:'left'}}>
+                <span>用户</span>
+                <span className="user-text">{curUsername}</span>
+              </span>
+              <RightOutlined style={{ color: '#bbb', marginTop: '14px',fontSize:18,float:'right' ,paddingRight:13}} />
+            </li>
+
+            <li onClick={() => prompt('请输入手机号', '',  [
+                { text: '取消' },
+                { text: '确认', onPress: value => console.log(`输入的内容:${value}`) },
+              ], 'default', '100')}>
+              <span style={{float:'left'}}>
+                <span>手机号</span>
+                <span className="user-text" style={{width:283}}>{currentTel[0]}</span>
+              </span>
+              <RightOutlined style={{ color: '#bbb', marginTop: '14px',fontSize:18,float:'right' ,paddingRight:13}} />
+            </li>
+
+             <Picker 
+              data={sex}
+              cols={1} 
+              value={currentSex}
+              onChange={value=>{
+                console.log(value)
+                this.setState({currentSex:value})
+                }  
+              } >
+              <List.Item arrow="horizontal">性别</List.Item>
+            </Picker>
+
+            <DatePicker
+              mode="date"
+              extra="Optional"
+              value={date}
+              onChange={date => {
+                console.log(date)
+                this.setState({ date })
+              }}
+            >
+              <List.Item arrow="horizontal">出生日期</List.Item>
+          </DatePicker>
+
           </ul>
-        </div>
-        <Button style={{ background: 'rgb(241, 109, 20)', color: '#fff' }} className="button">
-          退出登录
-        </Button>
+        </div> 
+        <Button style={{ background: 'rgb(241, 109, 20)', color: '#fff' }} className="button">退出登录</Button>
       </div>
     )
   }

@@ -4,11 +4,15 @@
 
 .user{
   width: 100%;
-  height:vw(667);
+  height:100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-color: rgb(240,242,245);
-  
-  overflow-x:hidden;
-  
+  // overflow-x:hidden;
+  z-index: 100;
   //头部
   header{
       width: 100%;
@@ -42,31 +46,47 @@
     margin:vw(11) 0 0 vw(11);
    li{
      width: 100%;
-     height:vw(42);
+     height:42px;
+     line-height: 42px;
      border-bottom:1px solid rgba(212, 211, 211, 0.53);
      box-sizing: border-box;
-     p{
-       width: 95%;
-       float: left;
-       height:100%;
-       span{
-         line-height:42px;
-       }
+     color: #444;
        img{
-         width: vw(62);
-         height: vw(62);
-         border:none;
-         float: right;
-         border-radius: vw(62);
+        width: 100%;
+        height: 100%;
        }
-     }
+       .user-text{
+         display: inline-block;
+         width: 296px;
+         text-align: right;
+         color: #888;
+       }
+     
    }
+
+   .am-list-item{
+     border-bottom: 1px solid #ddd;
+   }
+
+   .am-list-item .am-list-line{
+     margin-left: -13px;
+   }
+
+   .am-list-item .am-list-line .am-list-content{
+     color:'#444';
+     font-size: 14px;
+   }
+
+   .am-list-item .am-list-line .am-list-extra{
+     font-size: 14px;
+   }
+
   }
   button{
-    width: vw(300);
+    width: vw(375);
     height:vw(45);
     position: absolute;
-    bottom: vw(60);
-    left:vw(37);
+    bottom: 0;
+    left:0;
   }
 }

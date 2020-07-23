@@ -1,8 +1,13 @@
 .user {
   width: 100%;
-  height: 177.86667vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-color: #f0f2f5;
-  overflow-x: hidden;
+  z-index: 100;
 }
 
 .user header {
@@ -41,33 +46,46 @@
 
 .user ul li {
   width: 100%;
-  height: 11.2vw;
+  height: 42px;
+  line-height: 42px;
   border-bottom: 1px solid rgba(212, 211, 211, 0.53);
   box-sizing: border-box;
+  color: #444;
 }
 
-.user ul li p {
-  width: 95%;
-  float: left;
+.user ul li img {
+  width: 100%;
   height: 100%;
 }
 
-.user ul li p span {
-  line-height: 42px;
+.user ul li .user-text {
+  display: inline-block;
+  width: 296px;
+  text-align: right;
+  color: #888;
 }
 
-.user ul li p img {
-  width: 16.53333vw;
-  height: 16.53333vw;
-  border: none;
-  float: right;
-  border-radius: 16.53333vw;
+.user ul .am-list-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.user ul .am-list-item .am-list-line {
+  margin-left: -13px;
+}
+
+.user ul .am-list-item .am-list-line .am-list-content {
+  color: '#444';
+  font-size: 14px;
+}
+
+.user ul .am-list-item .am-list-line .am-list-extra {
+  font-size: 14px;
 }
 
 .user button {
-  width: 80vw;
+  width: 100vw;
   height: 12vw;
   position: absolute;
-  bottom: 16vw;
-  left: 9.86667vw;
+  bottom: 0;
+  left: 0;
 }
