@@ -19,7 +19,10 @@ class Gyl extends Component{
       })
     }
     toParent = () => {
-        this.props.parent.getChildrenMsg(this,this.state.msg)
+        if(!this.props.parent){
+            return false;
+        }
+       this.props.parent.getChildrenMsg(this,this.state.msg)
      
     }
   async  componentDidMount(){
