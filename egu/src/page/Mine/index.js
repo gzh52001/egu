@@ -8,21 +8,11 @@ import { SettingOutlined} from '@ant-design/icons';
 
 class Mine extends Component{
     state={
-        childrenMsg:"",
         yon:false
     }
     getChildrenMsg = (result, msg) => {
         this.setState({
-            childrenMsg: msg
-        },()=>{
-         const top = this.state.childrenMsg
-        //  console.log(top);
-           if(top > 60){
-            this.state.yon=true
-           }else if(top < 100){
-               
-            this.state.yon=false
-           }
+            yon: msg
         })
     }
     
@@ -35,7 +25,7 @@ class Mine extends Component{
             <div className="mine">
                         {/* 导航栏 */}
             <div className="top">
-              {yon?  <Top 
+              {yon ?  <Top 
                     left = {<img src="http://m.egu365.com/img/not_user.jpg" style={{borderRadius:"50%",width:"65%"}}></img>}
                     right = {<SettingOutlined style={{
                         fontSize:"5.8vw",color:"#c0c0c0"}}/>}
