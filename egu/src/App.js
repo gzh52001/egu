@@ -9,7 +9,7 @@ import Card from './page/Card';
 import Login from './page/Login';
 import Register from './page/Register';
 import Detail from "./page/Detail";
-
+import User from './page/User';
 
 
 import './App.css';
@@ -73,6 +73,7 @@ class App extends Component{
                     <Route path='/home' component={Home} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
+                    <Route path='/user' component={User} />
                     <Route path='/category' component={Category} />
                     <Route path='/card' component={Card} />
                     <Route path='/cart' component={Cart} />

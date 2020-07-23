@@ -1,0 +1,72 @@
+@function vw($px) {
+  @return ($px/375) * 100vw;
+}
+
+.user{
+  width: 100%;
+  height:vw(667);
+  background-color: rgb(240,242,245);
+  
+  overflow-x:hidden;
+  
+  //头部
+  header{
+      width: 100%;
+      height:vw(38.5);
+      background-color: #fff;
+      border-bottom: 2px solid rgb(211, 210, 210);
+      .navLift{
+        width: 12%;
+        height: 100%;
+        float: left;
+      }
+      .navTitle{
+        width: 76%;
+        height: 100%;
+        float: left;
+        text-align: center;
+        line-height:vw(38.5);
+        font-size: vw(16);
+      }
+      .navRight{
+        width: 12%;
+        height: 100%;
+        float: right; 
+      }    
+    }
+
+    //内容区
+  ul{
+    width:vw(363);
+    height: vw(250);
+    margin:vw(11) 0 0 vw(11);
+   li{
+     width: 100%;
+     height:vw(42);
+     border-bottom:1px solid rgba(212, 211, 211, 0.53);
+     box-sizing: border-box;
+     p{
+       width: 95%;
+       float: left;
+       height:100%;
+       span{
+         line-height:42px;
+       }
+       img{
+         width: vw(62);
+         height: vw(62);
+         border:none;
+         float: right;
+         border-radius: vw(62);
+       }
+     }
+   }
+  }
+  button{
+    width: vw(300);
+    height:vw(45);
+    position: absolute;
+    bottom: vw(60);
+    left:vw(37);
+  }
+}
