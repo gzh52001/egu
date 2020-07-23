@@ -10,10 +10,13 @@ class Gyl extends Component{
         isBottom:false,//不需要发数据
         pageNo:2,
         isShowTop:false,
-        msg:""
+        msg:false
     }
     goToTop=()=>{
         window.scrollTo(0,0);
+      this.setState({
+          msg:false
+      })
     }
     toParent = () => {
         this.props.parent.getChildrenMsg(this,this.state.msg)
@@ -49,11 +52,16 @@ class Gyl extends Component{
                 isShowTop:false
             })
         }
-        this.setState({
-            msg:window.scrollY
+        if(window.scrollY >= 60){
+             this.setState({
+            msg:true
         })
-        this.toParent();
-        // console.log("g",this.state.msg);
+        }else if(window.scrollY <= 70){
+            this.setState({
+                msg:false
+        })
+        }
+        this.toParent()
         if(scrollTop + clientHeight >=scrollHeight - 60 && !this.state.isBottom){
             this.setState({
                 isBottom:true,//到达底部需要发送数据

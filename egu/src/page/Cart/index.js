@@ -8,39 +8,46 @@ import {DeleteOutlined} from '@ant-design/icons';
 import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
 import cartApi from '@/api/cart'
 import "./css.scss"
+import { connect } from "react-redux";
 
 import Pop from './../Bubble/bubble'
 class Cart extends Component{
     state={
-        cartData:[{
-                goodId: "bf2382e8cb9d470f98df",
-                img: "http://oss.egu365.com/upload/6bfa6cd35aaf44588698c96c21b8f23d.jpg",
-                goodName: "【预售】正宗湖南炎陵黄桃2.5kg",
-                price: 88,
-                isSelect:true,
-                num:1
-            },{
-                goodId: "iS06O76j17BwE0Qv233B",
-                img: "http://oss.egu365.com/upload/e386ca5a2c4942a8bfe6ed58f04d8762.jpg",
-                goodName: "新西兰乐琪苹果350g/桶",
-                price: 59.8,
-                isSelect:false,
-                num:1
-            }],
-            val:1,
-            isAllSelect:true
+        cartData:[],
+        isAllSelect:true,
+        userId: localStorage.getItem("egu_userId")
      }
     goback=()=>{
         const {history}= this.props;
         history.push("/category")
     }
-    onChange = (goodId,val) => {
-       this.state.cartData.forEach(item =>{
-           if (item.goodId == goodId) {
-               this.setState({ val });
-               item.num=val
+
+    // 事件------------
+    // 删除
+    handleDel = (goodsId) => {
+        this.del(goodsId);
+    }
+
+    // 加减数量
+    onChange = (goodsId,newValue) => {
+        // console.log("val:", value, "this.state.val:", );
+        // 判断加还是减
+        let { cartData,userId } = this.state;
+        let preValue = null;
+        cartData.forEach(item => {
+            if(item.goodsId == goodsId) {
+                preValue = item.num
             }
-       })
+        })
+        // 判断是增是减
+        let type =  newValue > preValue ? 1 : 0;
+        let data = {
+            type,
+            goodsId,
+            userId
+        }
+        // 执行修改
+        this.update(data);
       }
    
 
@@ -48,7 +55,7 @@ class Cart extends Component{
     singleChange = (id) => {
         let cartData = [...this.state.cartData];
         cartData.forEach(item => {
-            if(item.goodId == id) {
+            if(item.goodsId == id) {
                 item.isSelect = !item.isSelect
             }
         })
@@ -80,12 +87,47 @@ class Cart extends Component{
         
     }
 
-    getCartList=async ()=>{
-        let res = await cartApi.getcartlist()
+    // 异步请求------------
+    // 获取列表数据
+    getCartList = () =>{
+       cartApi.getCartList(this.state.userId).then(res => {
+           this.setState({cartData:res.data})
+       }).catch((err) => {
+        console.log(err);
+       }) 
+    }
+
+    // 删除
+    del = async (goodsId) => {
+        try{
+            let data = {userId:this.state.userId, goodsId};
+            let res = await cartApi.del(data);
+            if(Number(res.code)) {
+                this.getCartList();
+            } else {
+                window.alert("删除失败");
+            }
+        } catch(err) {
+            console.log(err);
+        }
+        
+    }
+
+    // 加减数量
+    update = async (data) => {
+        try{
+            let res = await cartApi.update(data);
+            if(Number(res.code)) {
+                this.getCartList();
+            }
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     componentDidMount() {
-       
+        console.log("id00",this.state.userId);
+        this.getCartList()
     }
 
     render() {
@@ -116,36 +158,37 @@ class Cart extends Component{
                         {
                             cartData.map(cartDataitem=> {
                                 return (
-                                    <WingBlank size="sm"  key={cartDataitem.goodId}>
-                                    <div className="item" key={cartDataitem.goodId} style={{display:"inline-flex",background:"#fff"}}>
+                                    <WingBlank size="sm"  key={cartDataitem.goodsId}>
+                                    <div className="item" key={cartDataitem.goodsId} style={{display:"inline-flex",background:"#fff"}}>
                                         <div className="item-left" >
                                             <Checkbox.CheckboxItem style={{minHeight:"29.5vw",width:"10vw",paddingLeft:' 9px'}}
                                              onChange={(e)=>{
                                                 //  cartDataitem.isSelect=!cartDataitem.isSelect;console.log(cartDataitem.isSelect)
-                                                 this.singleChange(cartDataitem.goodId)
+                                                 this.singleChange(cartDataitem.goodsId)
                                                  
                                                 }} checked={cartDataitem.isSelect}/>
                                         </div>
                                         
                                         <div className="item-right"style={{display:"inline-flex"}}>
-                                                 <img src={cartDataitem.img} style={{width:"32.8%"}} />
+                                                 <img src={cartDataitem.goodsImg} style={{width:"32.8%"}} />
                                                  <ul style={{display:"Flex",flexDirection: 'column',justifyContent: 'space-between',padding:"3vw 3px 3px 3px"}}>
                                                  <li style={{display:"Flex",justifyContent: 'space-between'}}>
                                                      <div style={{overflow:"hidden" ,width:"54vw",height:"6.6vw",  textOverflow: "ellipsis",whiteSpace:"nowrap"}}>{cartDataitem.goodName}
                                                      </div>
-                                                     <div style={{color:"red", position: "absolute",right: "7px"}}><DeleteOutlined /></div>
-                                        
+                                                     <div  style={{color:"red", position: "absolute",right: "7px"}}>
+                                                         <DeleteOutlined onClick={this.handleDel.bind(this, cartDataitem.goodsId)} />
+                                                    </div>
                                                 </li>
                                                 <li>2</li>
                                                 <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
-                                                       <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.price}</div>
+                                                       <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
                                                         <div style={{flexGrow:"2"}}> 
                                                             <Stepper  style={{ width: '100%', minWidth: '100px' }}
-                                                            showNumber
-                                                            max={10}
-                                                            min={1}
-                                                            value={cartDataitem. num}
-                                                            onChange={this.onChange.bind(this,cartDataitem.goodId)}
+                                                                showNumber
+                                                                max={10}
+                                                                min={1}
+                                                                value={cartDataitem.num}
+                                                                onChange={this.onChange.bind(this,cartDataitem.goodsId)}
                                                             />
                                                         </div>
                                                 </li>
@@ -170,5 +213,9 @@ class Cart extends Component{
                 </div>)
     }
 }
+let mapStateToProps = state => {
+    return state.cart
+}
 Cart = withLogin(Cart)
+Cart = connect(mapStateToProps)(Cart);
 export default Cart;

@@ -42,5 +42,6 @@ export default {
     getBannerImgs,
     getGoodInfo,
     getDescImgs,
-    addToCart
+    addToCart,
+    isFirstAdd
 }

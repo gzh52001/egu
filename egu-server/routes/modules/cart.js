@@ -43,7 +43,7 @@ router.post("/add",( req, res) => {
     
 })
 
-// 判断用户是否第一次加入该商品
+// 判断用户是否第一次加入该商品  如果是第一次加入调用add,  如果不是第一次加入调用update type = 1
 router.get("/isFirstAdd", async (req, res) => {
     // params 动态路由参数
     // query 查询字符串
@@ -53,7 +53,8 @@ router.get("/isFirstAdd", async (req, res) => {
         if(!result.length) {
             res.send({
                 code:'1',
-                msg: "用户第一次加入该商品"
+                msg: "用户第一次加入该商品",
+                result
             })
         } else {
             res.send({
@@ -64,7 +65,7 @@ router.get("/isFirstAdd", async (req, res) => {
         }
 });
 
-// 查询：用户购物车数据
+// 查询：查询所有用户购物车数据
 router.get("/search/:userId", async (req, res) => {
     let { userId } = req.params;
     let sql = `select * from cart where userId = ${userId}`;
@@ -147,10 +148,11 @@ router.put("/update", async (req, res) => {
 
 // 删除: userId goodsId 
 router.delete("/del", async (req, res) => {
+    console.log(req.body);
     try {
         // 前端数据
         let { userId, goodsId } = req.body;
-
+        console.log(req.body);
         // sql语句
         let sql = `DELETE FROM cart WHERE userId = "${userId}" AND goodsId = "${goodsId}"`;
 

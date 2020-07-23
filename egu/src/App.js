@@ -48,7 +48,6 @@ class App extends Component{
             icon:<UserOutlined style={{fontSize:22,margin:"3px 0 0 1px"}} />
         }
       ],
-    //   current:0
     }
     render() {
         let {tabarList} = this.state
