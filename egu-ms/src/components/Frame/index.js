@@ -34,7 +34,6 @@ const { Header, Content, Sider, Footer } = Layout;
                                 return <Menu.Item key={item.pathname}>{item.title}</Menu.Item>
                                 })
                             }
-                            
                         </Menu>
                     </Sider>
                     <Content
@@ -42,10 +41,9 @@ const { Header, Content, Sider, Footer } = Layout;
                         style={{
                             padding: 24,
                             margin: 0,
-                            minHeight: 500,
+                            minHeight: 400,
                         }}
                     >
-
                         {this.props.children}
                     </Content>
                 </Layout>
