@@ -10,7 +10,7 @@ import Card from './page/Card';
 import Login from './page/Login';
 import Register from './page/Register';
 import Detail from "./page/Detail";
-
+import User from './page/User';
 
 
 import './App.css';
@@ -49,7 +49,6 @@ class App extends Component{
             icon:<UserOutlined style={{fontSize:22,margin:"3px 0 0 1px"}} />
         }
       ],
-    //   current:0
     }
     render() {
         let {tabarList} = this.state
@@ -75,6 +74,7 @@ class App extends Component{
                     <Route path='/home' component={Home} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
+                    <Route path='/mine/info' component={User} />
                     <Route path='/category' component={Category} />
                     <Route path='/card' component={Card} />
                     <Route path='/cart' component={Cart} exact />

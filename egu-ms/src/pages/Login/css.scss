@@ -1,0 +1,37 @@
+body {
+    width: 100%;
+    height: 100%;
+    background: url(https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2137180548,3801934319&fm=26&gp=0.jpg);
+    background-size: contain;
+
+}
+
+.login {
+    background: #fff;
+    border: 1px dashed #ccc;
+    width: 465px;
+    height: 330px;
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    top: 50%;
+    margin-top: -190px;
+    border-radius: 23px;
+    text-align: center;
+    filter: alpha(Opacity=80);
+    opacity: 0.9;
+    h1{
+        padding-top: 20px; ;
+    }
+    .ant-space-item{
+        padding-top: 25px;
+    }
+    
+}
+
+.ant-input-affix-wrapper{
+    width: 300px;
+    height: 40px;
+    // margin-left: 12px;
+    margin: auto;
+}

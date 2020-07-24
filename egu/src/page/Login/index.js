@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import Pop from './../Bubble/bubble'
 import './style.scss'
 
+const imgUrl = 'http://localhost:8000/'
 class Login extends Component {
 
     goReg = () => {
@@ -32,13 +33,14 @@ class Login extends Component {
                 localStorage.setItem('egu_token', res.data.token);
                 localStorage.setItem('egu_username', username);
                 localStorage.setItem('egu_userId', res.data.userId);
-                Toast.info('登录成功')
+                localStorage.setItem('egu_avatar',imgUrl+res.data.avatar)
+                Toast.info('登录成功',1)
                 this.props.history.push('/mine');
             }else{
-                Toast.info('token异常，请重试')
+                Toast.info('token异常，请重试',1)
             }
         } else {
-            Toast.info('账号或密码错误')
+            Toast.info('账号或密码错误',1)
         }
     }
 

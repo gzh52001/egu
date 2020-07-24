@@ -85,7 +85,8 @@ router.post('/login',async (req,res) =>{
                 status:true,
                 data:{
                     token,
-                    userId:p[0].id
+                    userId:p[0].id,
+                    avatar:p[0].avatarurl,
                 },
                 msg:'登录成功'
             }
@@ -133,7 +134,7 @@ router.post('/verify',(req,res)=>{
 // 获取所有用户
 router.get('/alluser',async (req,res)=>{
     try {
-        let sql = 'SELECT * FROM userinfo ';
+        let sql = 'SELECT id,username,sex,tel,birthday,avatarurl FROM userinfo ';
         let data =await query(sql);
         let info = {};
         if(data.length){
@@ -161,10 +162,42 @@ router.get('/alluser',async (req,res)=>{
     }
 })
 
+// 获取单个用户头像
+router.get('/avatar/:id',async (req,res)=>{
+    let {id}=req.params;
+    try {
+        let sql = `SELECT * FROM userinfo WHERE id='${id}' `
+        let data =await query(sql);
+        let info = {};
+        if(data.length){
+            info ={
+                code:2000,
+                status:true,
+                avatar:data[0].avatarurl,
+                msg:'查询成功'
+            }
+        }else{
+            info ={
+                code:3000,
+                status:false,
+                msg:'查询失败'
+            }  
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
 // 删除用户
 router.delete('/del/:id', async (req,res)=>{
     let {id} = req.params;
-    let sql = `DELETE FROM userinfo WHERE id=${id}`;
+    let sql = `DELETE FROM userinfo WHERE id='${id}'`;
     try {
         let p = await query(sql);
         let info ={}
@@ -194,10 +227,11 @@ router.delete('/del/:id', async (req,res)=>{
 })
 
 // 查询用户
-router.get('/searchuser/:id',async (req,res)=>{
-    let {id} = req.params;
+router.get('/searchuser',async (req,res)=>{
+    // let {id} = req.params;
     let {username} = req.query;
-    let sql = `SELECT * FROM userinfo WHERE id='${id}' OR username='${username}'`
+    // console.log(username)
+    let sql = `SELECT * FROM userinfo WHERE username='${username}'`
     try {
         let data = await query(sql);
         let info={};
@@ -226,6 +260,147 @@ router.get('/searchuser/:id',async (req,res)=>{
     }
 })
 
+// 修改生日
+router.post('/editbirthday/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {birthday} = req.body;
+    let date = new Date(birthday);
+    let y = date.getFullYear();
+    let m = date.getMonth()+1;
+    let d = date.getDate();
+    let sql = `update userinfo set birthday = '${y}-${m}-${d}' WHERE id='${id}'`
+    try {
+        let p =await query(sql);
+        let info = {};
+        if(p.affectedRows){
+            info={
+                code:2000,
+                status:true,
+                msg:'修改成功' 
+             }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'修改失败' 
+             }
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
+// 修改性别
+router.post('/editsex/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {sex} = req.body;
+    let sql = `update userinfo set sex = '${sex}' WHERE id='${id}'`
+    try {
+        let p =await query(sql);
+        let info = {};
+        if(p.affectedRows){
+            info={
+                code:2000,
+                status:true,
+                msg:'修改成功' 
+             }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'修改失败' 
+             }
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+})
+
+// 修改电话
+router.post('/edittel/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {tel} = req.body;
+    if(/^1[3-9]\d{9}$/.test(tel)){
+        let sql = `update userinfo set tel = '${tel}' WHERE id='${id}'`
+        try {
+            let p =await query(sql);
+            let info = {};
+            if(p.affectedRows){
+                info={
+                    code:2000,
+                    status:true,
+                    msg:'修改成功' 
+                 }
+            }else{
+                info={
+                    code:3000,
+                    status:false,
+                    msg:'修改失败' 
+                 }
+            }
+            res.send(info)
+        } catch (err) {
+            let info = {
+                code: err.errno,
+                flag: false,
+                message: '查询失败'
+            }
+            res.send(info);
+        }
+    }else{
+        let info = {
+            code: 3000,
+            flag: false,
+            message: '请输入正确的电话号码'
+        }
+        res.send(info);
+    }
+})
+
+// 修改用户名
+router.post('/editusername/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {username} = req.body;
+    let sql = `update userinfo set username = '${username}' WHERE id='${id}'`
+    try {
+        let p =await query(sql);
+        let info = {};
+        if(p.affectedRows){
+            info={
+                code:2000,
+                status:true,
+                msg:'修改成功' 
+                }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'修改失败' 
+                }
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+    
+})
 
 // 分页查询 查询用户列表
 router.get('/userlist',async (req,res)=>{
@@ -266,6 +441,8 @@ router.get('/userlist',async (req,res)=>{
         res.send(info);
     }
 })
+
+
 
 
 module.exports = router;

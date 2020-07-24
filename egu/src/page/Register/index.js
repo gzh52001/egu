@@ -12,10 +12,7 @@ import { LeftOutlined,EllipsisOutlined} from '@ant-design/icons';
 import {Toast} from 'antd-mobile';
 import Pop from './../Bubble/bubble'
 import userApi from '@/api/user';
-import {connect} from 'react-redux'
 import './style.scss'
-
-
 
 
 function Register(props) {
@@ -33,7 +30,7 @@ function Register(props) {
             // 注册
             let res = await userApi.Register(username, password);
             if (res.status) {
-                Toast.info(res.msg);
+                Toast.info(res.msg,1);
                 form.resetFields(); // 清空输入框内容
                 props.history.push('/login');
             }
@@ -105,14 +102,4 @@ function Register(props) {
 
 }
 
-// export default Register;
-export default connect((state)=>{
-    console.log(state)
-    return {
-    }
-},(dispatch=>{
-    console.log(dispatch)
-    return {
-        
-    }
-}))(Register);
+export default Register;
