@@ -4,9 +4,12 @@ import { DatePicker, List,Picker,Toast } from 'antd-mobile';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import Pop from '@/page/Bubble/bubble'
 import userApi from '@/api/user'
+import withLogin from '@/components/Hoc';
 import './style.scss'
 
-const prompt = Modal.prompt;
+
+const imgUrl = 'http://localhost:8000/'
+
 const id =localStorage.getItem('egu_userId')
 
 class User extends Component {
@@ -34,7 +37,8 @@ class User extends Component {
     telVisible:false,
     confirmLoading: false,
     userVal:'',
-    telVal:''
+    telVal:'',
+    id:localStorage.getItem('egu_userId')
   }
 
   jumpRout(rout) {
@@ -46,39 +50,32 @@ class User extends Component {
       // console.log(info.file.response.data, info.fileList);
     }
     if (info.file.status === 'done') {
-      // console.log(info.file.response)
-      localStorage.setItem('egu_avatar',info.file.response.data.imgurl)
-      this.setState({curAvatar:info.file.response.data.imgurl})
-      Toast.info('修改成功')
+      // console.log(imgUrl+info.file.response.data.imgurl)
+      localStorage.setItem('egu_avatar',imgUrl+info.file.response.data.imgurl)
+      this.setState({curAvatar:imgUrl+info.file.response.data.imgurl})
+      Toast.info('修改成功',1)
     } else if (info.file.status === 'error') {
-      Toast.info('修改失败')
+      Toast.info('修改失败',1)
     }
   }
 
-  changeUsername=async (val)=>{
-    console.log(val)
-   
-    // if(res.status){
-
-    // }else{
-    //   Toast.info('修改失败')
-    // }
-  }
-
     getUserInfo = async ()=>{
-      let res = await userApi.singerUserInfo(id);
-      let {username,sex,birthday,tel,avatarurl} = res.data[0];
-      birthday = new Date(birthday)
-      if(res.status){
-        this.setState({
-          curUsername:username,
-          currentSex:[sex],
-          date:birthday,
-          currentTel:[tel],
-          curAvatar:avatarurl
-        })
-      }else{
-        Toast.info('查询用户信息失败');
+      if(this.state.id){
+        let res = await userApi.singerUserInfo(localStorage.getItem('egu_userId'));
+        let {username,sex,birthday,tel,avatarurl} = res.data[0];
+        birthday = new Date(birthday)
+        if(res.status){
+          this.setState({
+            curUsername:username,
+            currentSex:[sex],
+            date:birthday,
+            currentTel:[tel],
+            curAvatar:imgUrl+avatarurl
+          })
+        }else{
+          Toast.info('查询用户信息失败',1);
+        }
+
       }
     }
 
@@ -87,14 +84,14 @@ class User extends Component {
       let res =await userApi.CheckNameIsExist(this.state.userVal);
       if(res.status){
         // 修改用户
-        let res1 = await userApi.editUsername(id,this.state.userVal)
+        let res1 = await userApi.editUsername(this.state.id,this.state.userVal)
         if(res1.status){
           this.setState({confirmLoading:false,nameVisible:false,curUsername:this.state.userVal})
           localStorage.setItem('egu_username',this.state.userVal);
-          Toast.info('修改成功')
+          Toast.info('修改成功',1)
         }
       }else{
-        Toast.info('用户已存在')
+        Toast.info('用户已存在',1)
       }
     }
 
@@ -105,14 +102,13 @@ class User extends Component {
 
     telHandleOk=async ()=>{
       this.setState({confirmLoading:true})
-      let res = await userApi.editTel(id,this.state.telVal)
+      let res = await userApi.editTel(this.state.id,this.state.telVal)
       if(res.status){
         this.setState({confirmLoading:false,telVisible:false,currentTel:this.state.telVal})
-        Toast.info('修改成功')
+        Toast.info('修改成功',1)
       }else{
-        Toast.info(res.message)
+        Toast.info(res.message,1)
       }
-      console.log(res)
     }
 
     // 关闭修改电话模态框
@@ -171,7 +167,7 @@ class User extends Component {
             <li onClick={()=>this.setState({telVisible:true})}>
               <span style={{float:'left'}}>
                 <span>手机号</span>
-                <span className="user-text" style={{width:283}}>{currentTel[0]}</span>
+                <span className="user-text" style={{width:283}}>{currentTel}</span>
               </span>
               <RightOutlined style={{ color: '#bbb', marginTop: '14px',fontSize:18,float:'right' ,paddingRight:13}} />
             </li>
@@ -182,8 +178,8 @@ class User extends Component {
               value={currentSex}
               onChange={async value=>{
                 this.setState({currentSex:value})
-                let res = await userApi.editSex(id,value);
-                if(!res.status){Toast.info('修改失败')}
+                let res = await userApi.editSex(this.state.id,value);
+                if(!res.status){Toast.info('修改失败',1)}
               }} >
               <List.Item arrow="horizontal">性别</List.Item>
             </Picker>
@@ -194,9 +190,8 @@ class User extends Component {
               value={date}
               onChange={async date => {
                 this.setState({ date })
-                console.log(date)
-                let res = await userApi.editBirthday(id,date);
-                if(!res.status){Toast.info('修改失败')}
+                let res = await userApi.editBirthday(this.state.id,date);
+                if(!res.status){Toast.info('修改失败',1)}
               }}
             >
               <List.Item arrow="horizontal">出生日期</List.Item>
@@ -207,6 +202,8 @@ class User extends Component {
         
         <Modal
           title="修改用户名"
+          cancelText='取消'
+          okText='确认'
           visible={this.state.nameVisible}
           onOk={this.nameHandleOk}
           onCancel={this.nameHandleCancel}
@@ -215,7 +212,9 @@ class User extends Component {
         </Modal>
 
         <Modal
-          title="修改电话"
+          title="修改手机号码"
+          cancelText='取消'
+          okText='确认'
           visible={this.state.telVisible}
           onOk={this.telHandleOk}
           onCancel={this.telHandleCancel}
@@ -223,10 +222,16 @@ class User extends Component {
           <Input placeholder="请输入手机号" onChange={e=>this.setState({telVal:e.currentTarget.value})}/>
         </Modal>
 
-        <Button style={{ background: 'rgb(241, 109, 20)', color: '#fff' }} className="button">退出登录</Button>
+        <Button style={{ background: 'rgb(241, 109, 20)', color: '#fff' }} className="button" onClick={()=>{
+          localStorage.removeItem('egu_username');
+          localStorage.removeItem('egu_token');
+          localStorage.removeItem('egu_userId');
+          localStorage.removeItem('egu_avatar');
+          this.props.history.push('/home')
+        }}>退出登录</Button>
       </div>
     )
   }
 }
-
+User = withLogin(User)
 export default User;

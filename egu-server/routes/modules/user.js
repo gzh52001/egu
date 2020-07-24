@@ -193,7 +193,6 @@ router.get('/avatar/:id',async (req,res)=>{
     }
 })
 
-
 // 删除用户
 router.delete('/del/:id', async (req,res)=>{
     let {id} = req.params;
