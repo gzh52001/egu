@@ -6,7 +6,8 @@ const router = express.Router();
 
 // 登录
 router.post('/login',async (req,res) =>{
-    let {username,password} = req.body;
+    // let {username,password} = req.body;
+    console.log(username,password);
     try {
         let sql =`SELECT * FROM msuserinfo WHERE username = '${username}' AND password ='${password}'`;
         let p = await query(sql);

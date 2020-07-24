@@ -10,6 +10,7 @@ const goodsRouter = require('./modules/goods');
 const cartRouter = require('./modules/cart');
 const userRouter =  require('./modules/user');
 const uploadRouter = require('./modules/upload');
+const LoginRouter = require('./modules/msLogin');
 
 // use无论是什么类型的请求都可以进入
 router.use('/category', categoryRouter); // 开启category子路由
@@ -17,5 +18,6 @@ router.use('/goods', goodsRouter);
 router.use('/cart', cartRouter); 
 router.use('/user',userRouter);
 router.use('/upload',uploadRouter);
+router.use('/admin',LoginRouter);
 
 module.exports = router; // 导出
