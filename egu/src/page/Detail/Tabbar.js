@@ -40,7 +40,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
             goodsImg,
             num:1,
             sum:mallPrice,
-            isSelect:0,
+            isSelect:1, // 默认勾选
         }
 
         // 发送添加请求
@@ -49,7 +49,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         if(Number(checkRes.code)) { // 第一次加入
             let res = await detailApi.addToCart(data);
             if(Number(res.code)) {
-                window.alert("添加成功")
+                // window.alert("添加成功")
                 this.getCartList();
             } else {
                 window.alert("添加失败")
@@ -62,7 +62,7 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
             }
             let res = await cartApi.update(data);
             if(Number(res.code)) {
-                window.alert("添加成功");
+                // window.alert("添加成功");
             }
         }
 
@@ -80,7 +80,6 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
         try{
             let res = await cartApi.getCartList(userId);
             this.props.getCartList(res.data);
-            console.log("dispatch:", this.props);
             this.setState({cartList:res.data}, () => {
                 this.setState({ // 更新购物车数量
                     count:this.state.cartList.length
@@ -94,7 +93,6 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
     // 周期函数------------------
     componentDidMount() {
        this.getCartList(); // 获取购物车列表
-       console.log(2222, this.props);
     }
     render() {
         return (
@@ -111,7 +109,9 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
                     <AppstoreOutlined />
                     <span>分类</span>
                 </li>
-                <li className="icon-aciton">
+                <li className="icon-aciton" 
+                    onClick = {() => this.props.history.push("/cart")}
+                >
                     <ShoppingCartOutlined />
                     <span>购物车</span>
                     <i>{this.state.count}</i>

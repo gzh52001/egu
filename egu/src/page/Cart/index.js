@@ -4,18 +4,20 @@ import Gyl from "@/components/getGuessYouLike"
 import Top from "@/components/Top"
 import Cartbottom from "./bottom"
 import {DeleteOutlined} from '@ant-design/icons';
+import { connect } from "react-redux";
+import actios from "@/store/action/cart";
   
 import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
 import cartApi from '@/api/cart'
 import "./css.scss"
-import { connect } from "react-redux";
 
 import Pop from './../Bubble/bubble'
 class Cart extends Component{
     state={
         cartData:[],
         isAllSelect:true,
-        userId: localStorage.getItem("egu_userId")
+        userId: localStorage.getItem("egu_userId"),
+        totalPrice:0
      }
     goback=()=>{
         const {history}= this.props;
@@ -126,13 +128,11 @@ class Cart extends Component{
     }
 
     componentDidMount() {
-        console.log("id00",this.state.userId);
-        this.getCartList()
+        this.getCartList();
     }
 
     render() {
-       
-        const {cartData} =this.state
+        const {cartData} =this.state;
         return (<div className="cart">
              {/* top */}
              <Top 
@@ -149,7 +149,7 @@ class Cart extends Component{
                 {/* 判断渲染 */}
                 
                 {
-                this.state.cartData == "" ? <div className="not-exist">
+                this.state.cartData == undefined ? <div className="not-exist">
                     <img src="http://m.egu365.com/img/cart.svg"  width="25%"/>
                     <br/>
                     <button>去逛逛</button></div>
@@ -181,16 +181,16 @@ class Cart extends Component{
                                                 </li>
                                                 <li>2</li>
                                                 <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
-                                                       <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
-                                                        <div style={{flexGrow:"2"}}> 
-                                                            <Stepper  style={{ width: '100%', minWidth: '100px' }}
-                                                                showNumber
-                                                                max={10}
-                                                                min={1}
-                                                                value={cartDataitem.num}
-                                                                onChange={this.onChange.bind(this,cartDataitem.goodsId)}
-                                                            />
-                                                        </div>
+                                                    <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
+                                                    <div style={{flexGrow:"2"}}> 
+                                                        <Stepper  style={{ width: '100%', minWidth: '100px' }}
+                                                            showNumber
+                                                            max={10}
+                                                            min={1}
+                                                            value={cartDataitem.num}
+                                                            onChange={this.onChange.bind(this,cartDataitem.goodsId)}
+                                                        />
+                                                    </div>
                                                 </li>
                                                 </ul>
                                         </div>
@@ -209,13 +209,22 @@ class Cart extends Component{
                  <Gyl/>
                  </div>
               </div>
-           <Cartbottom isAllSelect={this.state.isAllSelect} allChange={this.allChange} data={this.state} isSelectClick={this.isSelectClick}/>
-                </div>)
+           <Cartbottom 
+                isAllSelect={this.state.isAllSelect} 
+                allChange={this.allChange} 
+                data={this.state} 
+                isSelectClick={this.isSelectClick}
+                cartList={this.state.cartData}
+            />
+            </div>)
     }
 }
 let mapStateToProps = state => {
     return state.cart
 }
+
+let mapDispatchTopProps = actios;
+
 Cart = withLogin(Cart)
-Cart = connect(mapStateToProps)(Cart);
+Cart = connect(mapStateToProps,mapDispatchTopProps)(Cart);
 export default Cart;
