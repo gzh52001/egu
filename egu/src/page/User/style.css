@@ -82,6 +82,11 @@
   font-size: 14px;
 }
 
+.user ul .ant-upload.ant-upload-select {
+  height: 100%;
+  width: 150%;
+}
+
 .user button {
   width: 100vw;
   height: 12vw;
