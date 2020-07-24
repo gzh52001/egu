@@ -44,7 +44,7 @@ export const adminRoute = [
     {
         pathname: '/admin/cart',
         component: Cart,
-        title:"购物车管理",
+        title:"订单管理",
         isNav:true
     },
    
