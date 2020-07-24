@@ -27,25 +27,25 @@ export const adminRoute = [
         pathname: '/admin/home',
         component: Home,
         title:"首页",
-        isNav:true
+        isNav:true, auth: true 
     },
     {
         pathname: '/admin/member',
         component: Member,
         title:"会员管理",
-        isNav:true
+        isNav:true, auth: true 
     },
     {
         pathname: '/admin/goods',
         component: Goods,
         title:"商品管理",
-        isNav:true
+        isNav:true, auth: true 
     },
     {
         pathname: '/admin/cart',
         component: Cart,
         title:"购物车管理",
-        isNav:true
+        isNav:true, auth: true 
     },
    
    
