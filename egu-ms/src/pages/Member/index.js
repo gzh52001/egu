@@ -5,9 +5,9 @@ import { SearchOutlined } from '@ant-design/icons';
 export default class Member extends Component {
     state={
         columns:[{ // 表头数据
-                title: 'id',
-                dataIndex: 'id',
-                key: 'id',
+                title: 'ID',
+                dataIndex: 'ID',
+                key: 'ID',
                 width: 60,
                 align:'center'
               },
@@ -19,7 +19,14 @@ export default class Member extends Component {
                 align:'center'
               },
               {
-                title: '手机号',
+                title: '头像',
+                dataIndex: 'avatar',
+                key: 'avatar',
+                width: 150,
+                align:'center'
+              },
+              {
+                title: '手机号码',
                 dataIndex: 'tel',
                 key: 'tel',
                 align:'center'
@@ -59,18 +66,20 @@ export default class Member extends Component {
         }
 
         componentDidMount(){
+          
+
             let arr = []
             for (let i = 0; i < 10; i++) {
                 arr.push({
                   key:i,
-                  id:i,
+                  ID:i,
                   username: `Edward King ${i}`,
                   tel: 32,
                   sex: '男',
                   brithday:'2020-20-20'
                 });
               }
-                this.setState({data:arr})
+              this.setState({data:arr})
         }
 
     render() {
@@ -78,7 +87,7 @@ export default class Member extends Component {
         return (
             <div className="member">
                  <Card style={{ width: '100%' }}>
-                    <Input placeholder="请输入用户名"  style ={{width:220,marginRight:20}}/>
+                    <Input placeholder="请输入用户名或ID"  style ={{width:220,marginRight:20}}/>
                     <Button type="primary" icon={<SearchOutlined />}>
                        查询
                     </Button>

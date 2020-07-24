@@ -5,6 +5,7 @@ module.exports = override(
    // antd按需加载，不需要每个页面都引入"antd/dist/antd.css"了
      fixBabelImports('import', {
        libraryName: 'antd',
+       libraryDirectory: "es",
        style: 'css',
      }),
        // 配置路径别名
