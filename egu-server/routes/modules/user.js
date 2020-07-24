@@ -85,7 +85,8 @@ router.post('/login',async (req,res) =>{
                 status:true,
                 data:{
                     token,
-                    userId:p[0].id
+                    userId:p[0].id,
+                    avatar:p[0].avatarurl,
                 },
                 msg:'登录成功'
             }

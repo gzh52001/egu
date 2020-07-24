@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import Pop from './../Bubble/bubble'
 import './style.scss'
 
+const imgUrl = 'http://localhost:8000/'
 class Login extends Component {
 
     goReg = () => {
@@ -32,6 +33,7 @@ class Login extends Component {
                 localStorage.setItem('egu_token', res.data.token);
                 localStorage.setItem('egu_username', username);
                 localStorage.setItem('egu_userId', res.data.userId);
+                localStorage.setItem('egu_avatar',imgUrl+res.data.avatar)
                 Toast.info('登录成功',1)
                 this.props.history.push('/mine');
             }else{

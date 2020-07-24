@@ -8,7 +8,10 @@ import { SettingOutlined} from '@ant-design/icons';
 
 class Mine extends Component{
     state={
-        yon:false
+        yon:false,
+        avatarUrl:'',
+        token:localStorage.getItem('egu_token'),
+        username:'',
     }
     getChildrenMsg = (result, msg) => {
         this.setState({
@@ -17,9 +20,8 @@ class Mine extends Component{
     }
 
     toInfo=()=>{
-        let token = localStorage.getItem('egu_token');
-        let username = localStorage.getItem('egu_username');
-        if(token && username){
+        let {token} = this.state;
+        if(token){
             this.props.history.push("/mine/info")
         }else{
             this.props.history.push("/login")
@@ -28,15 +30,27 @@ class Mine extends Component{
     
     componentDidMount(){
         this.getChildrenMsg();
+        let {token} = this.state
+        if(token){
+            this.setState({
+                avatarUrl:localStorage.getItem('egu_avatar'),
+                username:localStorage.getItem('egu_username')
+            })
+        }else{
+            this.setState({
+                avatarUrl:'http://m.egu365.com/img/not_user.jpg',
+                username:'点击登录/注册用户'
+            })
+        }
     }
     render() {
-        const{yon}=this.state;
+        const{yon,avatarUrl,username}=this.state;
         return (
             <div className="mine">
                         {/* 导航栏 */}
             <div className="top">
               {yon ?  <Top 
-                    left = {<img src="http://m.egu365.com/img/not_user.jpg" style={{borderRadius:"50%",width:"65%"}}></img>}
+                    left = {<img src={avatarUrl} style={{borderRadius:"50%",width:"65%"}}></img>}
                     right = {<SettingOutlined style={{
                     fontSize:"5.8vw",color:"#c0c0c0"}}  onClick={this.toInfo}/>}
                     center = {{
@@ -50,10 +64,10 @@ class Mine extends Component{
             </div>
                         {/* 头部 */}
             <div className="user-wrap">
-                    <div className="user-ht flx"><img src="http://m.egu365.com/img/not_user.jpg" lazy="error"/>
+                    <div className="user-ht flx"><img src={avatarUrl} lazy="error"/>
                         <div className="user-t flx-1">
-                            <div className="greet">下午好</div>
-                            <div className="ellipsis">点击登录/注册用户</div>
+                            <div className="greet">您好</div>
+                            <div className="ellipsis" onClick={()=>{this.props.history.push('/login')}}>{username}</div>
                         </div>
                     </div>
             </div>
