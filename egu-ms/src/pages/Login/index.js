@@ -17,9 +17,7 @@ export default class Login extends Component {
                     placeholder="password"
                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     />
-                    <Button type="dashed" danger onClick={this.loginToHome}>login
-                    </Button>
-                         
+                    <Button type="primary" style={{width:80,height:40}} onClick={this.loginToHome}>登录</Button>
                  </Space>
             </div>
         )

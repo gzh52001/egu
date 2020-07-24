@@ -263,7 +263,11 @@ router.get('/searchuser/:id',async (req,res)=>{
 router.post('/editbirthday/:id',async (req,res)=>{
     let {id} = req.params;
     let {birthday} = req.body;
-    let sql = `update userinfo set birthday = '${birthday}' WHERE id='${id}'`
+    let date = new Date(birthday);
+    let y = date.getFullYear();
+    let m = date.getMonth()+1;
+    let d = date.getDate();
+    let sql = `update userinfo set birthday = '${y}-${m}-${d}' WHERE id='${id}'`
     try {
         let p =await query(sql);
         let info = {};
@@ -362,6 +366,39 @@ router.post('/edittel/:id',async (req,res)=>{
         }
         res.send(info);
     }
+})
+
+// 修改用户名
+router.post('/editusername/:id',async (req,res)=>{
+    let {id} = req.params;
+    let {username} = req.body;
+    let sql = `update userinfo set username = '${username}' WHERE id='${id}'`
+    try {
+        let p =await query(sql);
+        let info = {};
+        if(p.affectedRows){
+            info={
+                code:2000,
+                status:true,
+                msg:'修改成功' 
+                }
+        }else{
+            info={
+                code:3000,
+                status:false,
+                msg:'修改失败' 
+                }
+        }
+        res.send(info)
+    } catch (err) {
+        let info = {
+            code: err.errno,
+            flag: false,
+            message: '查询失败'
+        }
+        res.send(info);
+    }
+    
 })
 
 // 分页查询 查询用户列表
