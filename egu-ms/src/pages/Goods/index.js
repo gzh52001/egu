@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Button } from 'antd';
 
 
 //商品管理
