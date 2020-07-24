@@ -29,7 +29,6 @@ function withLogin(InnerCompoent) {
 
         render() {
             const {login} = this.state;
-            console.log(login)
            if(login){
                return super.render();
            }else{

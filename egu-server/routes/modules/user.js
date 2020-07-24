@@ -85,7 +85,8 @@ router.post('/login',async (req,res) =>{
                 status:true,
                 data:{
                     token,
-                    userId:p[0].id
+                    userId:p[0].id,
+                    avatar:p[0].avatarurl,
                 },
                 msg:'登录成功'
             }
@@ -133,7 +134,7 @@ router.post('/verify',(req,res)=>{
 // 获取所有用户
 router.get('/alluser',async (req,res)=>{
     try {
-        let sql = 'SELECT * FROM userinfo ';
+        let sql = 'SELECT id,username,sex,tel,birthday,avatarurl FROM userinfo ';
         let data =await query(sql);
         let info = {};
         if(data.length){
@@ -193,7 +194,6 @@ router.get('/avatar/:id',async (req,res)=>{
     }
 })
 
-
 // 删除用户
 router.delete('/del/:id', async (req,res)=>{
     let {id} = req.params;
@@ -227,10 +227,11 @@ router.delete('/del/:id', async (req,res)=>{
 })
 
 // 查询用户
-router.get('/searchuser/:id',async (req,res)=>{
-    let {id} = req.params;
+router.get('/searchuser',async (req,res)=>{
+    // let {id} = req.params;
     let {username} = req.query;
-    let sql = `SELECT * FROM userinfo WHERE id='${id}' OR username='${username}'`
+    // console.log(username)
+    let sql = `SELECT * FROM userinfo WHERE username='${username}'`
     try {
         let data = await query(sql);
         let info={};

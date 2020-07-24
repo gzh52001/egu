@@ -94,3 +94,8 @@
   bottom: 0;
   left: 0;
 }
+
+.ant-modal-content {
+  width: 300px;
+  margin: auto;
+}

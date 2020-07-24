@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 import { adminRoute } from "../../routes";
 
 let menu = adminRoute.filter(item => item.isNav); // 返回是菜单项的路由配置
-// console.log(menu);
 const { Header, Content, Sider, Footer } = Layout;
 
  class Frame extends Component {
