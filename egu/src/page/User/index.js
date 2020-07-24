@@ -31,8 +31,8 @@ class User extends Component {
     date:'',
     currentSex:[],
     currentTel:[],
-    curUsername:'',
-    curAvatar:'',
+    curUsername:localStorage.getItem('egu_username'),
+    curAvatar:localStorage.getItem('egu_avatar'),
     nameVisible:false,
     telVisible:false,
     confirmLoading: false,
@@ -186,7 +186,7 @@ class User extends Component {
 
             <DatePicker
               mode="date"
-              extra="Optional"
+              extra="请选择"
               value={date}
               onChange={async date => {
                 this.setState({ date })

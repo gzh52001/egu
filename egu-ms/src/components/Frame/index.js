@@ -15,14 +15,15 @@ const { Header, Content, Sider, Footer } = Layout;
     clearlocal=()=>{
         window.localStorage.removeItem('ms_username')
         window.localStorage.removeItem("ms_userId")
-        window.localStorage.removeItem("egu_username")
+        window.localStorage.removeItem("ms_token")
+        this.props.history.push('/login');
     }
     componentDidMount(){
     }
     render() {
         return (
             <>
-        <Layout>
+        <Layout style={{height:'100vh',overflow:'hidden'}}>
             <Header className="header" style={{  display:"flex",  flexDirection: "row" ,justifyContent:"space-between" }}>
                 <div> 
                     <h1 style={{color:"#fff"}}>
@@ -44,7 +45,7 @@ const { Header, Content, Sider, Footer } = Layout;
             </Header>
             <Content>
                 <Layout>
-                    <Sider width={200} className="site-layout-background">
+                    <Sider width={200} className="site-layout-background" height='100vh'>
                         <Menu
                             mode="inline"
                             defaultSelectedKeys={menu[0].pathname}
@@ -64,7 +65,7 @@ const { Header, Content, Sider, Footer } = Layout;
                         style={{
                             padding: 24,
                             margin: 0,
-                            minHeight: 500,
+                            height:'100vh',
                         }}
                     >
 
@@ -72,7 +73,7 @@ const { Header, Content, Sider, Footer } = Layout;
                     </Content>
                 </Layout>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>©2018 Created by EGU</Footer>
+            <Footer style={{ textAlign: 'center' }}>©2020 Created by EGU</Footer>
         </Layout>
         </>
         )

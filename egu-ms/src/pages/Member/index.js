@@ -168,7 +168,7 @@ export default class Member extends Component {
                     total,
                     pageSize:5,
                     onChange:this.changeSize }} 
-                  scroll={{ y: 350 }} />
+                  scroll={{ y: 370 }} />
             </div>
         )
     }

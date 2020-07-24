@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '@/page/Login';
+import Login from '@/pages/Login';
 
 
 // 反向继承 拦截
