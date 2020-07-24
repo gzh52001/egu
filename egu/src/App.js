@@ -5,6 +5,7 @@ import Home from './page/Home';
 import Category from './page/Category';
 import Mine from './page/Mine';
 import Cart from './page/Cart';
+import Settlement from "./page/Cart/settlement";
 import Card from './page/Card';
 import Login from './page/Login';
 import Register from './page/Register';
@@ -76,7 +77,8 @@ class App extends Component{
                     <Route path='/register' component={Register} />
                     <Route path='/category' component={Category} />
                     <Route path='/card' component={Card} />
-                    <Route path='/cart' component={Cart} />
+                    <Route path='/cart' component={Cart} exact />
+                    <Route path='/cart/settlement' component={Settlement} />
                     <Route path='/mine' component={Mine} />
                     <Route path="/detail/:id" component={Detail} />
                     <Route path='/notfound' component={()=> <div>notFound 404</div> } />
