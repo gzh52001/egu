@@ -9,8 +9,8 @@ body {
 .login {
     background: #fff;
     border: 1px dashed #ccc;
-    width: 500px;
-    height: 300px;
+    width: 465px;
+    height: 330px;
     position: absolute;
     left: 50%;
     margin-left: -250px;
@@ -21,9 +21,17 @@ body {
     filter: alpha(Opacity=80);
     opacity: 0.9;
     h1{
-        padding-top: 10px; ;
+        padding-top: 20px; ;
     }
     .ant-space-item{
         padding-top: 25px;
     }
+    
+}
+
+.ant-form-item{
+    width: 300px;
+    height: 40px;
+    margin: auto;
+    margin-top: 35px;
 }

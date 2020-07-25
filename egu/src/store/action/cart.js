@@ -1,11 +1,11 @@
 import { GET_CART_LIST } from "../actionType/cart";
 
 export default {
-    getCartList(cartList) {
-        // console.log(7777, cartList);
+    getCartList(storeCartList) {
+        // console.log(7777, storeCartList);
         let action = {
             type: GET_CART_LIST,
-            cartList
+            storeCartList
         }
         return action;
     }

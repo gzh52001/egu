@@ -1,14 +1,18 @@
 import React from 'react'
 import axios from "axios";
 import { Route, Switch, Redirect} from 'react-router-dom'
-
+import withLogin from '@/components/Hoc';
 import {adminRoute} from "./routes";
 
 import Frame from "./components/Frame";
-export default function App() {
-  axios.get("/api/cart/search/123").then(res =>console.log(res));
-  return (
-    <div>
+class App extends React.Component {
+  constructor(){
+    super();
+  }
+
+  render() {
+    
+    return(<div>
         <Frame>
             <Switch>
               {
@@ -20,6 +24,8 @@ export default function App() {
               <Redirect to="/404"/>
             </Switch>
         </Frame>
-    </div>
-  )
+    </div>) 
+    
+  }
 }
+export default withLogin(App)

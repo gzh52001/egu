@@ -2,6 +2,7 @@ const initState = {
     logined: false,
     egu_username: localStorage.getItem('egu_username'),
     egu_token: localStorage.getItem('egu_token'),
+    egu_id: localStorage.getItem('egu_userId'),
 }
 
 function reducer(state = initState, action) {

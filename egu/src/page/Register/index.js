@@ -30,7 +30,7 @@ function Register(props) {
             // 注册
             let res = await userApi.Register(username, password);
             if (res.status) {
-                Toast.info(res.msg);
+                Toast.info(res.msg,1);
                 form.resetFields(); // 清空输入框内容
                 props.history.push('/login');
             }
