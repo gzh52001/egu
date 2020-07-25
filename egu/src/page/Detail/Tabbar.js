@@ -43,11 +43,11 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
             isSelect:1, // 默认勾选
         }
 
-        // 发送添加请求
-        let checkRes = await detailApi.isFirstAdd({userId:this.state.userId, goodsId});
+        
         // 是否第一次加入
+        let checkRes = await detailApi.isFirstAdd({userId:this.state.userId, goodsId});
         if(Number(checkRes.code)) { // 第一次加入
-            let res = await detailApi.addToCart(data);
+            let res = await detailApi.addToCart(data); // 发送添加请求
             if(Number(res.code)) {
                 // window.alert("添加成功")
                 this.getCartList();

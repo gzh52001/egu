@@ -6,7 +6,6 @@ import {adminRoute} from "./routes";
 
 import Frame from "./components/Frame";
 export default function App() {
-  axios.get("/api/cart/search/123").then(res =>console.log(res));
   return (
     <div>
         <Frame>

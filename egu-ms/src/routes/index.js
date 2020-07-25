@@ -3,7 +3,7 @@ import {
     Home,
     Member,
     Goods,
-    Cart,
+    Order,
     Notfound,
     Login
 } from '../pages'
@@ -42,8 +42,8 @@ export const adminRoute = [
         isNav:true
     },
     {
-        pathname: '/admin/cart',
-        component: Cart,
+        pathname: '/admin/order',
+        component: Order,
         title:"订单管理",
         isNav:true
     },
