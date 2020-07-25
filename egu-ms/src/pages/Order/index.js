@@ -73,7 +73,8 @@ export default class Order extends Component {
       page:1,
       size:6,
       total:10,
-      isDelPopVisible: false
+      isDelPopVisible: false,
+      isOnSearchPage:false
     }
 
     this.delList = this.delList.bind(this);
@@ -106,7 +107,7 @@ export default class Order extends Component {
     }
 
     // 事件-------
-    // 查询
+    // 查询一条数据
     handleSearch = (value) => {
       this.setState({searchId:value}, () => {
         this.searchOne();
@@ -132,6 +133,13 @@ export default class Order extends Component {
         delOrderId:record.id
       }, () => {
         this.delList();
+      })
+    }
+
+    // 从搜索页返回
+    handleToOrderPage = () => {
+      this.setState({isOnSearchPage:false},() => {
+        this.searchPage(); // 请求分页数据，显示分页订单数据
       })
     }
 
@@ -170,7 +178,7 @@ export default class Order extends Component {
         })
     } 
 
-    // 请求一条数据
+    // 搜索一条数据
     searchOne = async () => {
       try {
         let res = await orderApi.searchOne(this.state.searchId);
@@ -179,7 +187,11 @@ export default class Order extends Component {
           res.data.forEach(item => {
             item.key = item.id;
           })
-          this.setState({orderList:res.data}); // 重新赋值表格数据
+          this.setState({
+            orderList:res.data,
+            isOnSearchPage:true,
+            searchId:""
+          }); // 重新赋值表格数据
         }
       } catch(err) {
         console.log(err);
@@ -250,8 +262,20 @@ export default class Order extends Component {
                   enterButton="搜索"
                   size="middle"
                   style={{width:300}}
-                  onSearch={value => this.handleSearch(value)}
+                  onSearch={(value) => {
+                    this.handleSearch(value)
+                  }}
                 />
+                {
+                  this.state.isOnSearchPage ? 
+                  <Button type="primary" style={{marginLeft:20}} 
+                    onClick={this.handleToOrderPage}
+                  >
+                    返回
+                  </Button>
+                  :""
+                }
+               
               </Card>
               <Table 
                 columns={this.state.levelOneColumns} 
