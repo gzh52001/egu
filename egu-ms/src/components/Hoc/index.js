@@ -14,7 +14,7 @@ function withLogin(InnerCompoent) {
         componentDidMount(){
             let token = localStorage.getItem('ms_token');
             let username = localStorage.getItem('ms_username');
-            // console.log(token,username)
+            console.log(token,username)
             if(token && username){
                 this.setState({login:true})
             }else{

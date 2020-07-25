@@ -20,7 +20,7 @@ class App extends React.Component {
                   return <Route key={item.pathname} path={item.pathname} component={item.component} exact={item.exact}/>
                 })
               }
-              <Redirect from="/admin" to="/admin/home" exact />
+              <Redirect from="/" to="/login" exact />
               <Redirect to="/404"/>
             </Switch>
         </Frame>
