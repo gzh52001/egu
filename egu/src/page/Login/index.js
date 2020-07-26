@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import Pop from './../Bubble/bubble'
 import './style.scss'
 
-const imgUrl = 'http://localhost:8000/'
+const imgUrl = 'http://120.25.242.86:8000/'
 class Login extends Component {
 
     goReg = () => {

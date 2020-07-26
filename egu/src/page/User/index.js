@@ -8,7 +8,7 @@ import withLogin from '@/components/Hoc';
 import './style.scss'
 
 
-const imgUrl = 'http://localhost:8000/'
+const imgUrl = 'http://120.25.242.86:8000/'
 
 // const id =localStorage.getItem('egu_userId')
 

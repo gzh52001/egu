@@ -3,7 +3,7 @@ import { Card,Input,Button,Table,Popconfirm,message,Pagination } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import memberApi from '@/api/member';
 
-const imgUrl = 'http://localhost:8000/'
+const imgUrl = 'http://120.25.242.86:8000/'
 export default class Member extends Component {
     state={
         columns:[{ // 表头数据

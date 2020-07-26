@@ -34,3 +34,14 @@
         }
     }
 }
+
+.item-left {
+    min-height: vw(114);
+}
+
+.cart-goods-name {
+    width: vw(140);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

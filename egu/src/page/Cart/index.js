@@ -160,26 +160,25 @@ class Cart extends Component{
                                 return (
                                     <WingBlank size="sm"  key={cartDataitem.goodsId}>
                                     <div className="item" key={cartDataitem.goodsId} style={{display:"inline-flex",background:"#fff"}}>
-                                        <div className="item-left" >
-                                            <Checkbox.CheckboxItem style={{minHeight:"29.5vw",width:"10vw",paddingLeft:' 9px'}}
+                                        <div className="item-left">
+                                            <Checkbox.CheckboxItem style={{height:"100%",width:"40px",paddingLeft:'9px'}}
                                              onChange={(e)=>{
-                                                //  cartDataitem.isSelect=!cartDataitem.isSelect;console.log(cartDataitem.isSelect)
                                                  this.singleChange(cartDataitem.goodsId)
-                                                 
                                                 }} checked={cartDataitem.isSelect}/>
                                         </div>
                                         
                                         <div className="item-right"style={{display:"inline-flex"}}>
-                                                 <img src={cartDataitem.goodsImg} style={{width:"32.8%"}} />
+                                                 <img src={cartDataitem.goodsImg} style={{width:"32.8%", height:"29vw",padding:"4px 0"}} />
                                                  <ul style={{display:"Flex",flexDirection: 'column',justifyContent: 'space-between',padding:"3vw 3px 3px 3px"}}>
                                                  <li style={{display:"Flex",justifyContent: 'space-between'}}>
                                                      <div style={{overflow:"hidden" ,width:"54vw",height:"6.6vw",  textOverflow: "ellipsis",whiteSpace:"nowrap"}}>{cartDataitem.goodName}
+                                                     
                                                      </div>
                                                      <div  style={{color:"red", position: "absolute",right: "7px"}}>
                                                          <DeleteOutlined onClick={this.handleDel.bind(this, cartDataitem.goodsId)} />
                                                     </div>
                                                 </li>
-                                                <li>2</li>
+                                                <li className="cart-goods-name">{cartDataitem.goodsName}</li>
                                                 <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
                                                     <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
                                                     <div style={{flexGrow:"2"}}> 
