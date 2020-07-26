@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Button, notification} from 'antd';
+import { Form, Input, Button, notification,} from 'antd';
 import {withRouter} from 'react-router-dom'
 import msuserApi from '../../api/msLogin'
 
@@ -10,6 +10,7 @@ class Login extends Component {
 
   
     onFinish = async (value) => {
+        console.log(value);
         let { username, password } = value;
         let res = await msuserApi.Login(username, password)
         // console.log(res)    

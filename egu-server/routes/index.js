@@ -7,21 +7,20 @@ router.use(bodyParser.urlencoded({
     extended: false
 })); // 转键值对数据 key=value&key=value
 
-const categoryRouter = require('./modules/category');
-const goodsRouter = require('./modules/goods');
+
 const cartRouter = require('./modules/cart');
 const userRouter = require('./modules/user');
 const uploadRouter = require('./modules/upload');
 const orderRouter = require('./modules/order'); // 订单
 const LoginRouter = require('./modules/msLogin');
+const msgoodsRouter = require('./modules/msgoodslist');
 
 // use无论是什么类型的请求都可以进入
-router.use('/category', categoryRouter); // 开启category子路由
-router.use('/goods', goodsRouter);
-router.use('/cart', cartRouter);
+router.use('/cart', cartRouter); // 开启category子路由
 router.use('/user', userRouter);
 router.use('/upload', uploadRouter);
 router.use('/order', orderRouter);
 router.use('/admin', LoginRouter);
+router.use('/goods', msgoodsRouter);
 
 module.exports = router; // 导出
