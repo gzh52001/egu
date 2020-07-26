@@ -40,8 +40,8 @@ function getAvatarById(id) {
 }
 
 // 获取用户
-function singerUserInfo(id){
-    let url = '/user/searchuser/' + id;
+function singerUserInfo(username){
+    let url = '/user/searchuser/?username=' + username;
     return require.get(url);
 }
 
