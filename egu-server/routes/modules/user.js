@@ -234,6 +234,7 @@ router.get('/searchuser',async (req,res)=>{
     let sql = `SELECT * FROM userinfo WHERE username='${username}'`
     try {
         let data = await query(sql);
+        console.log(data)
         let info={};
         if(data.length){
             info={
