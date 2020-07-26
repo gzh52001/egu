@@ -20,9 +20,12 @@ class Modals extends Component {
     this.setState({
       visible: false,
     });
-    // console.log('数据拿到：',this.props.details);
-    console.log('name:',);
+    
   };
+  inputChange(e){
+    alert(e.target.value)
+    
+  }
 
   //点击取消按钮回调
   handleCancel = e => {
@@ -53,17 +56,17 @@ class Modals extends Component {
               defaultValue：  input框默认值
               this.props: 获取父组件传过来的参数
             */}
-            <Form.Item label="商品名称：">
-              <Input allowClear defaultValue={this.props.details.name}></Input>
+            <Form.Item label="商品名称：" >
+              <Input allowClear defaultValue={this.props.details.name} onChange={(e)=>this.inputChange(e)}></Input>
             </Form.Item>
-            <Form.Item label="数 量：" style={{ marginLeft: '24px' }}>
-              <InputNumber  defaultValue={this.props.details.age}  min={1}/>
+            <Form.Item label="数 量：">
+              <InputNumber  defaultValue={this.props.details.age}  min={1} style={{ marginLeft: '24px' }}/>
             </Form.Item>
-            <Form.Item label="商 家：" style={{ marginLeft: '24px' }}>
-              <Input allowClear defaultValue={this.props.details.business}></Input>
+            <Form.Item label="商 家：" >
+              <Input allowClear defaultValue={this.props.details.business}style={{ marginLeft: '24px' }}></Input>
             </Form.Item>
-            <Form.Item label="产 地：" style={{ marginLeft: '24px' }}>
-              <Input allowClear defaultValue={this.props.details.address}></Input>
+            <Form.Item label="产 地：" >
+              <Input allowClear defaultValue={this.props.details.address} style={{ marginLeft: '24px' }}></Input>
             </Form.Item>
           </Form>
         </Modal>

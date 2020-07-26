@@ -10,7 +10,7 @@ export default class Login extends Component {
     onFinish = async (value) => {
         let { username, password } = value;
         let res = await msuserApi.Login(username, password)
-        console.log(res)    
+        console.log(res)
         if (res.status) {
             // 验证token
             let result = await msuserApi.verifyToken(res.data.token);
