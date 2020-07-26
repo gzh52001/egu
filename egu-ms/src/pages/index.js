@@ -1,9 +1,8 @@
 
-import Loadable from 'react-loadable'
+import Loadable from 'react-loadable' // 路由懒加载
 import Loading from '../components/loading'
 
-
-const Home = Loadable({
+const Home = Loadable({ 
     loader: () => import('./Home'),
     loading: Loading
 })

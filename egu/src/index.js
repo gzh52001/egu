@@ -11,13 +11,7 @@ import 'antd/dist/antd.css';
 // 样式
 import "./stylesheet/main.scss";
 
-
-
 const Route = process.env.NODE_ENV==="production" ? BrowserRouter : HashRouter;
-
-
-
-
 
 ReactDOM.render(
     <Provider store={store}>
