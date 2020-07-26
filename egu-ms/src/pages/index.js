@@ -15,8 +15,8 @@ const Goods = Loadable({
     loader: () => import('./Goods'),
     loading: Loading
 })
-const Cart = Loadable({
-    loader: () => import('./Cart'),
+const Order = Loadable({
+    loader: () => import('./Order'),
     loading: Loading
 })
 
@@ -36,7 +36,7 @@ export {
     Home,
     Member,
     Goods,
-    Cart,
+    Order,
     Login,
     Notfound
 }
