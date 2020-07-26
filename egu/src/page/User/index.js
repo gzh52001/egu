@@ -10,7 +10,7 @@ import './style.scss'
 
 const imgUrl = 'http://localhost:8000/'
 
-const id =localStorage.getItem('egu_userId')
+// const id =localStorage.getItem('egu_userId')
 
 class User extends Component {
   state = {
@@ -60,8 +60,8 @@ class User extends Component {
   }
 
     getUserInfo = async ()=>{
-      if(this.state.id){
-        let res = await userApi.singerUserInfo(localStorage.getItem('egu_userId'));
+      if(this.state.curUsername){
+        let res = await userApi.singerUserInfo(this.state.curUsername);
         let {username,sex,birthday,tel,avatarurl} = res.data[0];
         birthday = new Date(birthday)
         if(res.status){
@@ -123,7 +123,7 @@ class User extends Component {
 
 
   render() {
-    const { sex,date,currentSex,currentTel,curUsername,curAvatar } = this.state;
+    const { sex,date,currentSex,currentTel,curUsername,curAvatar,id } = this.state;
     return (
       <div className='user'>
 

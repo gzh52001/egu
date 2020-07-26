@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from "axios";
 import { Route, Switch, Redirect} from 'react-router-dom'
 import withLogin from '@/components/Hoc';
 import {adminRoute} from "./routes";
