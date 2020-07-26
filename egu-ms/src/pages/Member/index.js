@@ -7,7 +7,7 @@ const imgUrl = 'http://localhost:8000/'
 export default class Member extends Component {
     state={
         columns:[{ // 表头数据
-                title: 'ID',
+                title: '序号',
                 dataIndex: 'id',
                 key: 'id',
                 width: 60,
@@ -153,7 +153,7 @@ export default class Member extends Component {
         return (
             <div className="member">
                  <Card style={{ width: '100%' }}>
-                    <Input placeholder="请输入用户名"  style ={{width:220,marginRight:20}} onChange={(e)=>this.setState({searchVal:e.currentTarget.value})}/>
+                    <Input placeholder="请输入用户名" defaultValue="123" style ={{width:220,marginRight:20}} onChange={(e)=>this.setState({searchVal:e.currentTarget.value})}/>
                     <Button type="primary" icon={<SearchOutlined />} onClick={this.searchInfo}>
                        查询
                     </Button>
@@ -167,7 +167,8 @@ export default class Member extends Component {
                     defaultCurrent:1, 
                     total,
                     pageSize:5,
-                    onChange:this.changeSize }} 
+                    onChange:this.changeSize 
+                  }} 
                   scroll={{ y: 370 }} />
             </div>
         )
