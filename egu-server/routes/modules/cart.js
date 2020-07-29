@@ -65,7 +65,7 @@ router.get("/isFirstAdd", async (req, res) => {
         }
 });
 
-// 查询：查询所有用户购物车数据
+// 查询：查询用户所有购物车数据
 router.get("/search/:userId", async (req, res) => {
     let { userId } = req.params;
     let sql = `select * from cart where userId = ${userId}`;
@@ -144,6 +144,35 @@ router.put("/update", async (req, res) => {
     } catch(err) {
         console.log(err);
     } 
+})
+
+// 修改：单选  userId goodsId
+router.put("/updateSelect",async (req, res) => {
+    // 1. 获取前端数据
+    let { userId, goodsId, isSelect } = req.body;
+
+    // 2. sql语句
+    // MySQL数据库的字段类型为int类型时插入布尔值，会转换为1或0; 插入字符串转为0。
+    let sql = `UPDATE cart SET isSelect = ${isSelect} WHERE userId = '${userId}' AND goodsId = '${goodsId}'`;
+    try {
+        // 3. 执行sql语句
+        let updateRes = await query(sql);
+        // 4. 返回结果给前端
+        if(updateRes.affectedRows > 0) {
+            res.send({
+                code: 1,
+                msg: "修改成功"
+            });
+        } else {
+            res.send({
+                code: 0,
+                msg: "修改失败"
+            });
+        }
+    } catch(err) {
+        console.log(err);
+    }
+  
 })
 
 // 删除: userId goodsId 

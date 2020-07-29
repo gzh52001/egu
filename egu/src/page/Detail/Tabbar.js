@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import cartActions from "@/store/action/cart";
+import { Toast } from "antd-mobile";
 
 import detailApi from "@/api/detail";
 import cartApi from "@/api/cart";
@@ -42,17 +43,17 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
             sum:mallPrice,
             isSelect:1, // 默认勾选
         }
-
         
         // 是否第一次加入
         let checkRes = await detailApi.isFirstAdd({userId:this.state.userId, goodsId});
         if(Number(checkRes.code)) { // 第一次加入
             let res = await detailApi.addToCart(data); // 发送添加请求
             if(Number(res.code)) {
-                // window.alert("添加成功")
+                // 添加成功提示
+                Toast.info("添加成功");
                 this.getCartList();
             } else {
-                window.alert("添加失败")
+                Toast.info("添加失败");
             }
         } else {  // 不是第一次，添加数量
             let data = {
@@ -62,7 +63,8 @@ import {HomeOutlined,ShoppingCartOutlined,AppstoreOutlined  } from '@ant-design/
             }
             let res = await cartApi.update(data);
             if(Number(res.code)) {
-                // window.alert("添加成功");
+                // 添加成功提示
+                Toast.info("添加成功");
             }
         }
 

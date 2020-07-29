@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import  getGYL from "@/api/mine";
 import { WingBlank,WhiteSpace,Grid } from 'antd-mobile';
 import {ShoppingCartOutlined,ToTopOutlined } from '@ant-design/icons';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+
+import { addToCart } from "@/utils/addToCart";
 
 class Gyl extends Component{
     state={
@@ -12,6 +14,27 @@ class Gyl extends Component{
         isShowTop:false,
         msg:false
     }
+
+    // 点击图标加入购物车
+    handleAddToCart = (dataItem) => {
+        let userId = localStorage.getItem("egu_userId");
+        let { id:goodsId, goodsName, slogan, goodsImg, mallPrice} = dataItem;
+        // 如果该用户第一次加入该商品
+        let data = {
+            userId,
+            goodsId,
+            goodsName,
+            param2:slogan ? slogan : "", // 推广语
+            mallPrice,
+            goodsImg,
+            num:1,
+            sum:mallPrice,
+            isSelect:1, // 默认勾选
+        }
+        // 发起添加请求 tuils/addToCart
+        addToCart(data, this.props.getCartList);
+    }
+
     goToTop=()=>{
         window.scrollTo(0,0);
       this.setState({
@@ -110,16 +133,34 @@ class Gyl extends Component{
                     <WingBlank  size="sm">
                     <WhiteSpace  size="xs"/>
                        <div style={{ backgroundColor:"#fff",}}>
-                            <img src={dataItem.icoImg} style={{ display:" inline-block"}} alt="" onClick={this.goToDetail.bind(this,dataItem.id)}/>
-                            <div style={{height:"27px",margin:"0 5px",textOverflow: 'ellipsis',whiteSpace:'nowrap',overflow:'hidden',fontSize:"13.5px",textAlign: 'left'}}>{dataItem.goodsName}</div>
+                            <img 
+                                src={dataItem.icoImg} 
+                                style={{ display:" inline-block"}} 
+                                alt="" 
+                                onClick={this.goToDetail.bind(this,dataItem.id)}
+                            />
+                            <div 
+                                style={{height:"27px",margin:"0 5px",textOverflow: 'ellipsis',whiteSpace:'nowrap',overflow:'hidden',fontSize:"13.5px",textAlign: 'left'}}
+                            >
+                                {dataItem.goodsName}
+                            </div>
                             <div className="clearfix" style={{padding:'0 0 0 5.7px'}}>
                                 <i style={{display:'inline-block',float: 'left',fontStyle:'normal',fontSize:"18.6px",color: '#f80'}}>{"￥"}{dataItem.salePrice}</i>
-                                <i style={{display:'inline-block',float: 'right',margin:"0 8.15px 0 0",color: '#fff',borderRadius: '50%',backgroundColor:"#f80",width:"22.5px",height:"22.5px"} } onClick={this.buyNew}><ShoppingCartOutlined style={{fontSize:'18px'}} /></i>
+                                {/* 购物车图标 */}
+                                <i 
+                                    style={{display:'inline-block',float: 'right',margin:"0 8.15px 0 0",color: '#fff',borderRadius: '50%',backgroundColor:"#f80",width:"22.5px",height:"22.5px"} } 
+                                    onClick={this.buyNew}
+                                >
+                                    <ShoppingCartOutlined 
+                                        onClick={this.handleAddToCart.bind(this, dataItem)} 
+                                        style={{fontSize:'18px'}} 
+                                    />
+                                </i>
                             </div>
-                         </div>
+                        </div>
                     </WingBlank>
-                )}/>
-    </WingBlank>
+                    )}/>
+                </WingBlank>
                     {
                     isShowTop?<div className="go-top" onClick={this.goToTop}>
                         <ToTopOutlined style={{fontSize:20,color:"#aaa"}} />

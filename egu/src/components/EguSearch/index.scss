@@ -1,0 +1,38 @@
+@function vw($px) {
+    @return ($px/375) * 100vw;
+}
+
+.egu-search-wraper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    // background-color: pink;
+}
+
+.egu-input {
+    border:none;
+    outline: none;
+    height: vw(30);
+    width: 100%;
+    border-radius: vw(15);
+    padding: 0 vw(26);
+    box-sizing: border-box;
+    background-color: #F7F8FA;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: vw(13);
+    color: gray;
+}
+
+.egu-input::-webkit-input-placeholder {
+    color: rgb(177, 174, 174);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0;
+    margin-left: vw(7);
+    top: 52%;
+    transform: translateY(-50%);
+}
