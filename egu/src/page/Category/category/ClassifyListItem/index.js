@@ -12,7 +12,6 @@ import detailApi from "@/api/detail";
      // { id:goodsId} = data 结构重命名 原名:另起名称
      let { id:goodsId, goodsName, mallPrice, slogan, goodsImg } = data;
      let userId = localStorage.getItem("egu_userId");
-     console.log("goodsId:", goodsId);
      
      function toDetail(e) {
         if(e.target.tagName !== "I") {

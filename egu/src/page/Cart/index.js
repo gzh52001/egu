@@ -94,11 +94,11 @@ class Cart extends Component{
     }
 
     // 是否是点击加入购物车，因为加入购物车操作是在getGuessYouLike组件中
-    handleIsAddCart = (e) => {
-        if(e.target.tagName == "svg" || e.target.tagName == "path") {
-            this.getCartList(); // 获取最新购物车数据渲染
-        }
-    }   
+    // handleIsAddCart = (e) => {
+    //     if(e.target.tagName == "svg" || e.target.tagName == "path") {
+    //         this.getCartList(); // 获取最新购物车数据渲染
+    //     }
+    // }   
         
     // 异步请求------------
     // 获取列表数据

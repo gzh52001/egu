@@ -61,6 +61,8 @@ export default class Detail extends Component {
                 this.setState({
                     goodInfo:res.obj,
                     bseGoodsEo:res.obj.bseGoodsEo
+                }, () => {
+                    this.getDescImgs(); // 请求数据：获取简介图片
                 })
             } 
         } catch(err) {
@@ -68,10 +70,10 @@ export default class Detail extends Component {
         }
     }
 
-    // 获取简介图片
+    // 获取简介图片  获取商品信息后执行
     async getDescImgs() {
         try {
-            let res = await detailApi.getDescImgs();
+            let res = await detailApi.getDescImgs(this.state.goodInfo.goodsId);
             if(res.state === 200) this.setState({descImgs:res.obj});
         } catch(err) {
             console.log(err);
@@ -82,7 +84,6 @@ export default class Detail extends Component {
     componentDidMount() {
         this.getBannerImgs(); // 请求数据：获取轮播图图片
         this.getGoodInfo();  // 请求数据：获取商品信息
-        this.getDescImgs(); // 请求数据：获取简介图片
 
         this.elAppDetail.style.height = window.innerHeight - 40 * window.innerWidth / 375  + "px";
         this.elAppDetail.style.overflowY = "auto";
@@ -134,7 +135,7 @@ export default class Detail extends Component {
                 {/* swiper */}
                 <div className="detial-swiper">
                     {
-                        // 数据请求回来后再调用
+                        // 请求的数据回来后再调用
                         bannerImgs.length > 0 ?
                         <MySwiper setting={{
                             height: "vw(375)",
@@ -245,9 +246,14 @@ export default class Detail extends Component {
 
                 {/* 商品简介 */}
                 <div className="more-desc">
-                    <div 
-                        dangerouslySetInnerHTML={{ __html:this.state.descImgs.goodsDesc}}>
-                    </div>
+                    {
+                        this.state.descImgs ?
+                        <div 
+                            dangerouslySetInnerHTML={{ __html:this.state.descImgs.goodsDesc}}>
+                        </div> 
+                        :""
+                    }
+                    
                 </div>
                 
                 {/* tabbar */}
