@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Top from "./category/Top";
+import Top from "@/components/Top";
+import EguSearch from "@/components/EguSearch"
 import categoryApi from "@/api/category";
 import Lefttabs from "./category/LeftTabs";
 import TopTabs from "./category/TopTabs";
@@ -131,7 +132,15 @@ class Category extends Component{
                 }}>
                 <div className="category">
                     <div className="category-top">
-                        <Top/>
+                        {/* top */}
+                        <Top 
+                            left = {<i 
+                                onClick={() => this.props.history.push("/home")} 
+                                className="iconfont icon-zuojiantou"></i>}
+                            right = {<i className="iconfont icon-gengduo"></i>}
+                        >
+                           <EguSearch placeholder="搜索" />
+                        </Top>
                         <TopTabs />
                     </div>
                     <div className="category-content">

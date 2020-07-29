@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ClassfiyContext from "../../CategoryContext";
 import ClassifyListItem from "../ClassifyListItem";
-import { withRouter } from "react-router-dom";
-
 
 export default class index extends Component {
     render() {
@@ -18,7 +16,6 @@ export default class index extends Component {
                             if(!list.length > 0) {
                                 return
                             }
-                            
                             return (
                                 items.map((item, index) => {
                                     return (

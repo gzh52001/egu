@@ -6,14 +6,10 @@ import { connect } from "react-redux";
 
 import { orderId } from "@/utils/tool";
 import orderApi from "@/api/order";
-import Top from "@/components/Top";
 import "./index.scss";
-import Settlement from "../settlement";
 import actions from "@/store/action/cart";
 
-const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
-let pitch=false ;
 
 let mapStateToProps = (state) => {
     return state.cart
@@ -67,7 +63,6 @@ class Cartbottom extends React.Component{
         // orderGoods表数据-------
         let { cartList } = this.props;
         order.goods = cartList.filter(item => item.isSelect); // 筛选出来勾选的商品
-        console.log('order', order);
         this.add(order);
     }
 

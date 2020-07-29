@@ -11,9 +11,18 @@ import Login from './page/Login';
 import Register from './page/Register';
 import Detail from "./page/Detail";
 import User from './page/User';
-
-
 import './App.css';
+
+import Loadable from "react-loadable";
+import Loading from "@/components/Loading";
+
+const Order = Loadable({
+    loader: () => import("./page/Order"),
+    loading: Loading
+})
+
+
+
 
 class App extends Component{
     state={
@@ -79,6 +88,7 @@ class App extends Component{
                     <Route path='/card' component={Card} />
                     <Route path='/cart' component={Cart} exact />
                     <Route path='/cart/settlement' component={Settlement} />
+                    <Route path='/order' component={Order} />
                     <Route path='/mine' component={Mine} />
                     <Route path="/detail/:id" component={Detail} />
                     <Route path='/notfound' component={()=> <div>notFound 404</div> } />

@@ -105,7 +105,35 @@ router.post("/add", async (req, res) => {
     
 }); 
 
+// 查询：用户订单信息
+router.get("/getUserOrder/:userId", async (req, res) => {
+    let { userId } = req.params;
+    // sql语句
+    // 查询用户的订单有哪些
+    let userOrderSql = `SELECT * FROM orderlist WHERE userId = '${userId}'`;
+    // 执行sql语句
+    let userOrderRes = await query(userOrderSql);
+    for(var i = 0; i < userOrderRes.length; i++) {
+        var orderGoodsSql = `SELECT * FROM ordergoods WHERE orderId = '${userOrderRes[i].id}'`;
+        // 查询订单号下的所有商品
+        var orderGoodsRes = await query(orderGoodsSql);
+        if(!orderGoodsRes.length > 0) {
+            res.send({
+                code: 0,
+                msg: "查询失败"
+            });
+            return;
+        }
+        userOrderRes[i].goods = orderGoodsRes;
+        console.log(orderGoodsRes);
+    }
+    res.send(userOrderRes)
+
+});
+
+
 // 后台:::::::::::::::::::::::::::::::::::::::::
+// 查询所有订单信息
 router.get("/search/list", async (req,res) => {
     let orderSql = "select * from orderlist";
     let goodsSql = "select * from ordergoods";
@@ -180,13 +208,6 @@ router.get("/searchPage", async (req, res) => {
             var goodsSql = `SELECT * FROM ordergoods WHERE orderId = '${pageListRes[i].id}'`; // 查询商品
             pageListRes[i].goods= await query(goodsSql);
         }
-        // pageListRes.forEach(async item => {
-        //     var goodsSql = `SELECT * FROM ordergoods WHERE orderId = '${item.id}'`; // 查询商品
-        //      item.goods= await query(goodsSql);
-        //      console.log(item)
-        //      arr.push(item)
-        // })
-        console.log(pageListRes);
         
         if(pageListRes.length > 0) {
             res.send({

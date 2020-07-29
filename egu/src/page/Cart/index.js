@@ -7,15 +7,16 @@ import {DeleteOutlined} from '@ant-design/icons';
 import { connect } from "react-redux";
 import actios from "@/store/action/cart";
   
-import {Checkbox,WingBlank,WhiteSpace, Stepper  } from 'antd-mobile';
+import {Checkbox,WingBlank,WhiteSpace, Stepper, Toast  } from 'antd-mobile';
 import cartApi from '@/api/cart'
 import "./css.scss"
+import { addToCart } from "@/utils/addToCart";
 
 import Pop from './../Bubble/bubble'
 class Cart extends Component{
     state={
         cartData:[],
-        isAllSelect:true,
+        isAllSelect:false,
         userId: localStorage.getItem("egu_userId"),
         totalPrice:0
      }
@@ -48,27 +49,30 @@ class Cart extends Component{
             goodsId,
             userId
         }
-        // 执行修改
+        // 执行修改, 修改完成获取购物车数据、重新渲染
         this.update(data);
       }
    
 
     // 單選
     singleChange = (id) => {
-        let cartData = [...this.state.cartData];
-        cartData.forEach(item => {
-            if(item.goodsId == id) {
-                item.isSelect = !item.isSelect
+        let data = {
+            goodsId: id,
+            userId:this.state.userId
+        }
+        let { cartData } = this.state;
+        for(var i = 0; i < cartData.length; i++) {
+            if(id == cartData[i].goodsId) {
+                cartData[i].isSelect = !cartData[i].isSelect;
+                data.isSelect = cartData[i].isSelect;
+                // 发起请求修改数据,请求成功后再重新请求一次购物车数据
+                cartApi.updateSelect(data).then((res) => {
+                    console.log(res)
+                    this.getCartList();
+                });
+                break;
             }
-        })
-
-        this.setState({
-            cartData
-        }, () => {
-            this.setState({
-                isAllSelect:this.state.cartData.every(item => item.isSelect)
-            })
-        })
+        }
     }
 
     // 全选
@@ -89,11 +93,23 @@ class Cart extends Component{
         
     }
 
+    // 是否是点击加入购物车，因为加入购物车操作是在getGuessYouLike组件中
+    handleIsAddCart = (e) => {
+        if(e.target.tagName == "svg" || e.target.tagName == "path") {
+            this.getCartList(); // 获取最新购物车数据渲染
+        }
+    }   
+        
     // 异步请求------------
     // 获取列表数据
     getCartList = () =>{
        cartApi.getCartList(this.state.userId).then(res => {
-           this.setState({cartData:res.data})
+           let { data } = res;
+           this.setState({
+               cartData:res.data,
+                // 是否全选  res.code ? 购物车是否为空
+               isAllSelect: res.code ? data.every(item => item.isSelect) : false
+            })
        }).catch((err) => {
         console.log(err);
        }) 
@@ -105,6 +121,7 @@ class Cart extends Component{
             let data = {userId:this.state.userId, goodsId};
             let res = await cartApi.del(data);
             if(Number(res.code)) {
+                Toast.info("删除成功",1.5);
                 this.getCartList();
             } else {
                 window.alert("删除失败");
@@ -135,7 +152,7 @@ class Cart extends Component{
         const {cartData} =this.state;
         return (<div className="cart">
              {/* top */}
-             <Top 
+                <Top 
                     left = {<i className="iconfont icon-zuojiantou" onClick={this.goback}></i>}
                     right = {<Pop />}
                     center = {{
@@ -203,11 +220,11 @@ class Cart extends Component{
                    }
             </div>
             {/* 猜你喜欢 */}
-            <div className="guess-you-like">
+            <div onClick={this.handleIsAddCart} className="guess-you-like">
                 <img src='http://m.egu365.com/img/guess_you_like.jpg'/>
-                 <Gyl/>
-                 </div>
-              </div>
+                <Gyl getCartList={this.getCartList.bind(this)}/>
+                </div>
+            </div>
            <Cartbottom 
                 isAllSelect={this.state.isAllSelect} 
                 allChange={this.allChange} 
