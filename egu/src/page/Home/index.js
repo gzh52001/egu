@@ -58,14 +58,9 @@ class Home extends Component{
     goSwiperList=(id)=>{
         console.log(id)
     }
- 
 
-    componentDidMount(){
-        this.getMenuData();
-        this.getImgTaiGuo();
-        this.getSwiperImg();
-
-         new Swiper ('.swiper-container', {
+    componentDidUpdate(){
+        new Swiper ('.swiper-container', {
             loop: true, // 循环模式选项
             slidesPerView: 3.7, // 显示3.5个
             centeredSlides: true, // 居中
@@ -74,10 +69,19 @@ class Home extends Component{
             slidesOffsetBefore : 2, // 第一个与左边偏移量
           
           }) 
+       
+    }
+ 
+
+    componentDidMount(){
+        this.getMenuData();
+        this.getImgTaiGuo();
+        this.getSwiperImg();
+        
     }
     componentWillUnmount(){
-        cancel('get_http://api.egu365.com/news/recommend/seats/136/images','被拦截')
-        cancel('get_http://api.egu365.com/news/recommend/seats/138/images','被拦截')
+        // cancel('get_http://api.egu365.com/news/recommend/seats/136/images','被拦截')
+        // cancel('get_http://api.egu365.com/news/recommend/seats/138/images','被拦截')
     }
   
 
