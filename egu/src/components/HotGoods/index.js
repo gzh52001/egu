@@ -102,10 +102,7 @@ class HotGoods extends Component {
         )
     }
 
-    componentDidMount() {
-        this.getData();
-        this.getRushBuyData();
-
+    componentDidUpdate(){
         new Swiper('.hot-goods-one-swiper-container', {
             loop: true,
             slidesPerView: 2.3,
@@ -118,6 +115,14 @@ class HotGoods extends Component {
             spaceBetween: -10,
             slidesOffsetBefore: 10,
         })
+    }
+
+
+    componentDidMount() {
+        this.getData();
+        this.getRushBuyData();
+
+      
     }
 
     render() {
