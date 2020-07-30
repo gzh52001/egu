@@ -16,8 +16,8 @@ function getGoodInfo(data) {
 }
 
 // 获取简介图片
-function getDescImgs() {
-    return require.get("/goods/desc?id=790f3865f2c44e50ab64");
+function getDescImgs(goodsId) {
+    return require.get(`/goods/desc?id=${goodsId}`);
 }
 
 // 加入购物车

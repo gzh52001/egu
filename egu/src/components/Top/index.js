@@ -9,7 +9,7 @@ export default class index extends Component {
                 <div className="top-left">
                      { left } {/* 具名插槽 */}
                 </div>
-                <div className="top-center" style={center.contentStyle}>
+                <div className="top-center" style={center ? center.contentStyle : {}}>
                      {this.props.children} {/* 匿名插槽 */}
                 </div>
                 <div className="top-right">

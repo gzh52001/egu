@@ -57,7 +57,6 @@ const { Header, Content, Sider, Footer } = Layout;
                                 return <Menu.Item key={item.pathname}>{item.title}</Menu.Item>
                                 })
                             }
-                            
                         </Menu>
                     </Sider>
                     <Content
@@ -68,7 +67,6 @@ const { Header, Content, Sider, Footer } = Layout;
                             height:'100vh',
                         }}
                     >
-
                         {this.props.children}
                     </Content>
                 </Layout>

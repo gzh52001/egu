@@ -1,9 +1,8 @@
 
-import Loadable from 'react-loadable'
+import Loadable from 'react-loadable' // 路由懒加载
 import Loading from '../components/loading'
 
-
-const Home = Loadable({
+const Home = Loadable({ 
     loader: () => import('./Home'),
     loading: Loading
 })
@@ -15,8 +14,8 @@ const Goods = Loadable({
     loader: () => import('./Goods'),
     loading: Loading
 })
-const Cart = Loadable({
-    loader: () => import('./Cart'),
+const Order = Loadable({
+    loader: () => import('./Order'),
     loading: Loading
 })
 
@@ -36,7 +35,7 @@ export {
     Home,
     Member,
     Goods,
-    Cart,
+    Order,
     Login,
     Notfound
 }

@@ -15,7 +15,6 @@ function reducer(preState = initState, action) {
             return newState;
         // 获取购物车数据
         case GET_CART_LIST:
-            // console.log("reducer", action.storeCartList);
             newState.storeCartList = [...action.storeCartList];
             newState.count = newState.storeCartList.length;
             return newState;

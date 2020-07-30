@@ -18,7 +18,7 @@ export default class Lefttabs extends Component {
         this.setState({
             list:res.list,
         }, () => { // 在回调例拿到最新的state
-            console.log("list", this.state.list);
+            // console.log("list", this.state.list);
         })
     }
     componentDidMount() {
