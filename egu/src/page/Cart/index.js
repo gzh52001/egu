@@ -67,7 +67,6 @@ class Cart extends Component{
                 data.isSelect = cartData[i].isSelect;
                 // 发起请求修改数据,请求成功后再重新请求一次购物车数据
                 cartApi.updateSelect(data).then((res) => {
-                    console.log(res)
                     this.getCartList();
                 });
                 break;
@@ -76,21 +75,34 @@ class Cart extends Component{
     }
 
     // 全选
-    allChange = () => {
-        let preState = this.state.cartData.every(item => item.isSelect);
-        let cartdata = [...this.state.cartData];
-        cartdata.forEach(item => {
-            item.isSelect = !preState
-        })
+    allChange = async () => {
+        // let preState = this.state.cartData.every(item => item.isSelect);
+        // let cartdata = [...this.state.cartData];
+        // cartdata.forEach(item => {
+        //     item.isSelect = !preState
+        // })
 
-        this.setState({
-            cartData:cartdata
-        }, () => {
-            this.setState({
-                isAllSelect:this.state.cartData.every(item => item.isSelect)
-            })
-        })
-        
+        // this.setState({
+        //     cartData:cartdata
+        // }, () => {
+        //     this.setState({
+        //         isAllSelect:this.state.cartData.every(item => item.isSelect)
+        //     })
+        // })
+        let { userId, isAllSelect:isSelect} = this.state;
+        let data = {
+            userId,
+            isSelect:!isSelect
+        }
+        try {
+            let res = await  cartApi.updateSelect(data);
+            this.getCartList();
+            if(!Number(res.code)) {
+                console.log(res.msg);
+            }
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     // 是否是点击加入购物车，因为加入购物车操作是在getGuessYouLike组件中
@@ -189,13 +201,13 @@ class Cart extends Component{
                                                  <ul style={{display:"Flex",flexDirection: 'column',justifyContent: 'space-between',padding:"3vw 3px 3px 3px"}}>
                                                  <li style={{display:"Flex",justifyContent: 'space-between'}}>
                                                      <div style={{overflow:"hidden" ,width:"54vw",height:"6.6vw",  textOverflow: "ellipsis",whiteSpace:"nowrap"}}>{cartDataitem.goodName}
-                                                     
+                                                     {cartDataitem.goodsName}
                                                      </div>
                                                      <div  style={{color:"red", position: "absolute",right: "7px"}}>
                                                          <DeleteOutlined onClick={this.handleDel.bind(this, cartDataitem.goodsId)} />
                                                     </div>
                                                 </li>
-                                                <li className="cart-goods-name">{cartDataitem.goodsName}</li>
+                                                <li className="cart-goods-name"></li>
                                                 <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
                                                     <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
                                                     <div style={{flexGrow:"2"}}> 
