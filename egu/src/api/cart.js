@@ -21,7 +21,6 @@ function del(data) {
 
 // 修改：修改单选
 function updateSelect(data) {
-    console.log(data);
     return request.put("/cart/updateSelect", data)
 }
 

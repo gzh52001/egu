@@ -146,14 +146,19 @@ router.put("/update", async (req, res) => {
     } 
 })
 
-// 修改：单选  userId goodsId
+// 修改：单选  userId goodsId isSelect  全选：body = {isSelect, userId}   
 router.put("/updateSelect",async (req, res) => {
     // 1. 获取前端数据
     let { userId, goodsId, isSelect } = req.body;
 
     // 2. sql语句
     // MySQL数据库的字段类型为int类型时插入布尔值，会转换为1或0; 插入字符串转为0。
+    // 单选
     let sql = `UPDATE cart SET isSelect = ${isSelect} WHERE userId = '${userId}' AND goodsId = '${goodsId}'`;
+    // 全选
+    if(goodsId === undefined) {
+        sql = `UPDATE cart SET isSelect = ${isSelect} WHERE userId = '${userId}'`;
+    }
     try {
         // 3. 执行sql语句
         let updateRes = await query(sql);
