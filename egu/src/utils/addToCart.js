@@ -12,7 +12,7 @@ export async function addToCart(data,getCartList) {
         let res = await detailApi.addToCart(data); // 发送添加请求
         if(Number(res.code)) {
             // 添加成功提示
-            Toast.info("添加成功11", 1.5);
+            Toast.info("添加成功", 1.5);
             // 如果是在购物车页的猜你喜欢添加成功后刷新
             if(typeof getCartList == "function") {
                 getCartList()
