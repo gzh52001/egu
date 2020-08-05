@@ -6,14 +6,15 @@
     position: fixed;
     top: 0;
     left: 0;
-    overflow: hidden;
     z-index: 100;
     width: 100%;
     height: 100vh;
     background-color: #fff;
     padding-top: vw(44);
-    
     .settlement-goods {
+        height: 100%;
+        overflow: auto;
+        padding:vw(44) 0;
         li {
             position: relative;
             display: flex;
@@ -42,10 +43,19 @@
         left: 0;
         height: vw(40);
         width: 100%;
-        background-color: orangered;
+        background-color: rgb(92, 185, 194);
         color: #fff;
         line-height: vw(40);
         text-align: center;
+        transition: all linear .3s;
+        &:active {
+            background-color: rgb(15, 112, 136);
+        }
+    }
+
+    .should-pay {
+        position: fixed;
+        top: vw(44);
     }
 }
 

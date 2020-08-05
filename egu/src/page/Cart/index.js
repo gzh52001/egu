@@ -183,52 +183,51 @@ class Cart extends Component{
                     <br/>
                     <button>去逛逛</button></div>
                  : 
-                        <>
-                        {
-                            cartData.map(cartDataitem=> {
-                                return (
-                                    <WingBlank size="sm"  key={cartDataitem.goodsId}>
-                                    <div className="item" key={cartDataitem.goodsId} style={{display:"inline-flex",background:"#fff"}}>
-                                        <div className="item-left">
-                                            <Checkbox.CheckboxItem style={{height:"100%",width:"40px",paddingLeft:'9px'}}
-                                             onChange={(e)=>{
-                                                 this.singleChange(cartDataitem.goodsId)
-                                                }} checked={cartDataitem.isSelect}/>
-                                        </div>
-                                        
-                                        <div className="item-right"style={{display:"inline-flex"}}>
-                                                 <img src={cartDataitem.goodsImg} style={{width:"32.8%", height:"29vw",padding:"4px 0"}} />
-                                                 <ul style={{display:"Flex",flexDirection: 'column',justifyContent: 'space-between',padding:"3vw 3px 3px 3px"}}>
-                                                 <li style={{display:"Flex",justifyContent: 'space-between'}}>
-                                                     <div style={{overflow:"hidden" ,width:"54vw",height:"6.6vw",  textOverflow: "ellipsis",whiteSpace:"nowrap"}}>{cartDataitem.goodName}
-                                                     {cartDataitem.goodsName}
-                                                     </div>
-                                                     <div  style={{color:"red", position: "absolute",right: "7px"}}>
-                                                         <DeleteOutlined onClick={this.handleDel.bind(this, cartDataitem.goodsId)} />
-                                                    </div>
-                                                </li>
-                                                <li className="cart-goods-name"></li>
-                                                <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
-                                                    <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
-                                                    <div style={{flexGrow:"2"}}> 
-                                                        <Stepper  style={{ width: '100%', minWidth: '100px' }}
-                                                            showNumber
-                                                            max={10}
-                                                            min={1}
-                                                            value={cartDataitem.num}
-                                                            onChange={this.onChange.bind(this,cartDataitem.goodsId)}
-                                                        />
-                                                    </div>
-                                                </li>
-                                                </ul>
-                                        </div>
-                                        </div>
-                                    <WhiteSpace />
-                                </WingBlank>)
-                            })
-                        }
-
-                        </>
+                    <>
+                    {
+                        cartData.map(cartDataitem=> {
+                            return (
+                                <WingBlank size="sm"  key={cartDataitem.goodsId}>
+                                <div className="item" key={cartDataitem.goodsId} style={{display:"inline-flex",background:"#fff"}}>
+                                    <div className="item-left">
+                                        <Checkbox.CheckboxItem style={{height:"100%",width:"40px",paddingLeft:'9px'}}
+                                            onChange={(e)=>{
+                                                this.singleChange(cartDataitem.goodsId)
+                                            }} checked={cartDataitem.isSelect}/>
+                                    </div>
+                                    
+                                    <div className="item-right"style={{display:"inline-flex"}}>
+                                        <img src={cartDataitem.goodsImg} style={{width:"32.8%", height:"29vw",padding:"4px 0"}} />
+                                        <ul style={{display:"Flex",flexDirection: 'column',justifyContent: 'space-between',padding:"3vw 3px 3px 3px"}}>
+                                            <li style={{display:"Flex",justifyContent: 'space-between'}}>
+                                                <div style={{overflow:"hidden" ,width:"54vw",height:"6.6vw",  textOverflow: "ellipsis",whiteSpace:"nowrap"}}>{cartDataitem.goodName}
+                                                {cartDataitem.goodsName}
+                                                </div>
+                                                <div  style={{color:"red", position: "absolute",right: "7px"}}>
+                                                    <DeleteOutlined onClick={this.handleDel.bind(this, cartDataitem.goodsId)} />
+                                                </div>
+                                            </li>
+                                            <li className="cart-goods-name"></li>
+                                            <li  style={{display:"flex",marginRight:"-16px",color:"red"}}>
+                                                <div style={{flexGrow:"3"}}>{"￥"}{cartDataitem.mallPrice}</div>
+                                                <div style={{flexGrow:"2"}}> 
+                                                    <Stepper  style={{ width: '100%', minWidth: '100px' }}
+                                                        showNumber
+                                                        max={10}
+                                                        min={1}
+                                                        value={cartDataitem.num}
+                                                        onChange={this.onChange.bind(this,cartDataitem.goodsId)}
+                                                    />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <WhiteSpace />
+                            </WingBlank>)
+                        })
+                    }
+                    </>
                    }
             </div>
             {/* 猜你喜欢 */}
@@ -237,13 +236,13 @@ class Cart extends Component{
                 <Gyl getCartList={this.getCartList.bind(this)}/>
                 </div>
             </div>
-           <Cartbottom 
-                isAllSelect={this.state.isAllSelect} 
-                allChange={this.allChange} 
-                data={this.state} 
-                isSelectClick={this.isSelectClick}
-                cartList={this.state.cartData}
-            />
+                <Cartbottom 
+                    isAllSelect={this.state.isAllSelect} 
+                    allChange={this.allChange} 
+                    data={this.state} 
+                    isSelectClick={this.isSelectClick}
+                    cartList={this.state.cartData}
+                />
             </div>)
     }
 }

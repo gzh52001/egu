@@ -1,5 +1,6 @@
 const express = require("express");
 const query = require("../../db/mysql"); // 导入执行sql语句模块
+const e = require("express");
 
 const router = express.Router();
 
@@ -16,6 +17,56 @@ function formatArrToString(arr) {
 }
 
 // 前台:::::::::::::::::::::::::::::::::::::::::
+
+// 修改：支付状态  userId orderId
+router.put("/updataPayStatus", (req, res) => {
+    // 1. 获取前端数据
+    let { userId, orderId } = req.body;
+    // 2. 编写sql语句
+    let sql = `UPDATE orderlist SET isPayed = 1 WHERE userId = '${userId}' AND id = '${orderId}'`;
+    // 3. 执行sql语句
+    query(sql).then(result => {
+        if(result.affectedRows > 0) {
+            // 4. 返回数据给前端
+            res.send({
+                code:1,
+                msg: "支付成功"
+            })
+        } else {
+            res.send({
+                code:0,
+                msg:"支付失败"
+            })
+        }
+    })
+    
+})
+
+// 修改： 是否取消订单  是否完成订单  
+//  userId, orderId  statusType: isCancel || isDone
+router.put("/updateStatus", (req, res) => {
+    // 1. 获取前端数据
+    let { userId, orderId, statusType } = req.body;
+    // 2. 编写sql语句
+    let sql = `UPDATE orderlist SET ${statusType} = 1 WHERE userId = '${userId}' AND id = '${orderId}'`;
+    // 3. 执行sql语句
+    query(sql).then(result => {
+        if(result.affectedRows > 0) {
+            // 4. 返回数据给前端
+            res.send({
+                code:1,
+                msg: "修改成功"
+            })
+        } else {
+            res.send({
+                code:0,
+                msg:"修改失败"
+            })
+        }
+    })
+    
+})
+
 // 增加
 router.post("/add", async (req, res) => {
 
@@ -26,7 +77,6 @@ router.post("/add", async (req, res) => {
      let orderValues = Object.values(req.body);
      orderValues = orderValues.slice(0, -1)
      let orderValStr = formatArrToString(orderValues);
-    //  console.log(orderValStr);
     let orderSql = `INSERT INTO orderList(${orderKeysStr}) VALUES(${orderValStr})`;
     // 执行sql语句
     let orderInsertRes = await query(orderSql);
@@ -67,7 +117,6 @@ router.post("/add", async (req, res) => {
 
     let goodsKeysAndVals = []
     goodsArr.forEach((item,index) => {
-        // console.log(Object.keys(item));
         // 处理键
         item.orderId = req.body.id;
         let orderKeys = Object.keys(item);
@@ -107,27 +156,31 @@ router.post("/add", async (req, res) => {
 
 // 查询：用户订单信息
 router.get("/getUserOrder/:userId", async (req, res) => {
-    let { userId } = req.params;
-    // sql语句
-    // 查询用户的订单有哪些
-    let userOrderSql = `SELECT * FROM orderlist WHERE userId = '${userId}'`;
-    // 执行sql语句
-    let userOrderRes = await query(userOrderSql);
-    for(var i = 0; i < userOrderRes.length; i++) {
-        var orderGoodsSql = `SELECT * FROM ordergoods WHERE orderId = '${userOrderRes[i].id}'`;
-        // 查询订单号下的所有商品
-        var orderGoodsRes = await query(orderGoodsSql);
-        if(!orderGoodsRes.length > 0) {
-            res.send({
-                code: 0,
-                msg: "查询失败"
-            });
-            return;
+    try {
+        let { userId } = req.params;
+        // sql语句
+        // 查询用户的订单有哪些
+        let userOrderSql = `SELECT * FROM orderlist WHERE userId = '${userId}'`;
+        // 执行sql语句
+        let userOrderRes = await query(userOrderSql);
+        for(var i = 0; i < userOrderRes.length; i++) {
+            var orderGoodsSql = `SELECT * FROM ordergoods WHERE orderId = '${userOrderRes[i].id}'`;
+            // 查询订单号下的所有商品
+            var orderGoodsRes = await query(orderGoodsSql);
+            if(!orderGoodsRes.length > 0) {
+                res.send({
+                    code: 0,
+                    msg: "查询失败"
+                });
+                return;
+            }
+            userOrderRes[i].goods = orderGoodsRes;
         }
-        userOrderRes[i].goods = orderGoodsRes;
-        console.log(orderGoodsRes);
+        res.send(userOrderRes)
+    } catch(err) {
+        console.log(err);
     }
-    res.send(userOrderRes)
+    
 
 });
 
@@ -202,7 +255,6 @@ router.get("/searchPage", async (req, res) => {
     try {
         let allRes = await query(searchAllSql);
         let pageListRes = await query(sql);
-        console.log(pageListRes);
         let arr=[]
         for (var i = 0; i < pageListRes.length; i++) {
             var goodsSql = `SELECT * FROM ordergoods WHERE orderId = '${pageListRes[i].id}'`; // 查询商品

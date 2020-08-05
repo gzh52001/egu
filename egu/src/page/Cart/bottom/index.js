@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { orderId } from "@/utils/tool";
 import orderApi from "@/api/order";
 import "./index.scss";
 import actions from "@/store/action/cart";
@@ -50,20 +49,18 @@ class Cartbottom extends React.Component{
 
     // 去结算
     handleBuyNow = () => {
-        this.props.history.push('/cart/settlement');
-        this.props.getCartList([...this.props.cartList]);
-        // order表数据-------
-        let order = {
-            id:orderId("EGU", 5), // EGU + 时间戳 + 5位随机数
-            userId:localStorage.getItem("egu_userId"),
-            date: new Date().getTime(), // 当前时间戳
-            isSend: 0 // 默认不发货
+        console.log("123", this.props.cartList);
+        if(this.props.cartList === undefined) {
+            Toast.info("购物车暂无商品", 1.5);    
+            return;    
+        } else if (this.props.cartList.filter(item => item.isSelect).length === 0) {
+            Toast.info("没有勾选商品", 1.5);
+            return;
         }
-
-        // orderGoods表数据-------
-        let { cartList } = this.props;
-        order.goods = cartList.filter(item => item.isSelect); // 筛选出来勾选的商品
-        this.add(order);
+        this.props.history.push('/cart/settlement');
+        // [...x]  如果x不是可迭代对象会报错
+        this.props.getCartList(this.props.cartList);
+        
     }
 
     // 支付

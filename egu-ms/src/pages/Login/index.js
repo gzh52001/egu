@@ -13,11 +13,7 @@ class Login extends Component {
         console.log(value);
         let { username, password } = value;
         let res = await msuserApi.Login(username, password)
-<<<<<<< HEAD
-        console.log(res)
-=======
         // console.log(res)    
->>>>>>> 9390ee03a86fbe82a36d1af32b09277e8cabd6c4
         if (res.status) {
             // 验证token
             let result = await msuserApi.verifyToken(res.data.token);
